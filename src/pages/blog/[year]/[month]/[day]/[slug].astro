@@ -1,0 +1,48 @@
+---
+export const getStaticPaths = async () => {
+  //load astro glob with utf-8 encoding
+
+  const posts = await Astro.glob("/src/content/legacy_blog/**/*.md*")
+
+  return posts.map((post) => {
+    const split = post.file.split("/").pop().split(".").shift()
+    const rawFileSplit = /(\d\d\d\d-\d\d-\d\d)(?:-)(.*)/g.exec(split)
+    const [year, month, day] = rawFileSplit?.[1].split("-") || []
+
+    return {
+      params: {
+        slug: rawFileSplit?.[2],
+        year,
+        month,
+        day,
+      },
+    }
+  })
+}
+
+const {slug, year, month, day} = Astro.params
+const posts = await Astro.glob("/src/content/legacy_blog/**/*.md*")
+const {Content, frontmatter} = posts.find((post) => {
+  const split = post.file.split("/").pop().split(".").shift()
+
+  return split === `${year}-${month}-${day}-${slug}`
+}) || {
+  Content: () => null,
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="prose">
+      <h1>{frontmatter.title}</h1>
+      <Content />
+    </main>
+  </body>
+</html>
