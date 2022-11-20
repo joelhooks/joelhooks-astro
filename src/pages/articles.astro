@@ -1,0 +1,67 @@
+---
+import {SEO} from "astro-seo"
+const newerPosts = await Astro.glob("../content/blog/**/*.md*")
+const olderPosts = await Astro.glob("/src/content/legacy_blog/**/*.md*")
+
+const allPosts = [
+  ...newerPosts.map((post) => {
+    return {
+      title: post.frontmatter.title,
+      date: post.frontmatter.date,
+      description: post.frontmatter.description,
+      path: `/${post.frontmatter.slug}`,
+    }
+  }),
+  ...olderPosts.map((post) => {
+    const split = post.file.split("/").pop().split(".").shift()
+    const rawFileSplit = /(\d\d\d\d-\d\d-\d\d)(?:-)(.*)/g.exec(split)
+    const [year, month, day] = rawFileSplit?.[1].split("-") || []
+    return {
+      title: post.frontmatter.title,
+      date: post.frontmatter.date,
+      description: post.frontmatter.description,
+      path: `/blog/${year}/${month}/${day}/${rawFileSplit?.[2]}`,
+    }
+  }),
+].sort(function (a, b) {
+  return new Date(b.date).getTime() - new Date(a.date).getTime()
+})
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <SEO
+      title="articles written by Joel Hooks"
+      description="digital garden focused on teaching, technology, and the web"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="prose p-2">
+      {
+        allPosts.map((post) => {
+          return (
+            <article>
+              <h2>
+                <a href={post.path}>{post.title}</a>
+              </h2>
+              <p>
+                {new Date(post.date).toLocaleDateString("en-us", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </p>
+              <p>{post.description}</p>
+            </article>
+          )
+        })
+      }
+    </main>
+  </body>
+</html>

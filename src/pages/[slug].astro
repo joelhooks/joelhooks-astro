@@ -1,4 +1,5 @@
 ---
+import {SEO} from "astro-seo"
 export const getStaticPaths = async () => {
   //load astro glob with utf-8 encoding
 
@@ -23,13 +24,40 @@ const {Content, frontmatter} = posts.find(
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <SEO
+      title={frontmatter?.title}
+      description={frontmatter?.description}
+      twitter={{
+        card: "summary_large_image",
+        site: "@jhooks",
+        creator: "@jhooks",
+      }}
+      openGraph={{
+        image: {
+          alt: "Joel Hooks",
+        },
+        basic: {
+          title: frontmatter.title,
+          type: "article",
+          image: `https://joelhooks-opengraph-images.netlify.app/opengraph?title=${encodeURIComponent(
+            frontmatter.title
+          )}&author=${encodeURIComponent("https://twitter.com/jhooks")}&v=${
+            process.env.OG_IMAGE_VERSION
+          }`,
+        },
+        optional: {
+          description: frontmatter.description,
+        },
+      }}
+    />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
-    <main class="prose">
+    <main class="prose p-2">
+      <a href="/">Home</a>
       <h1>{frontmatter.title}</h1>
       <Content />
     </main>
