@@ -14,11 +14,17 @@ export const getStaticPaths = async () => {
 
 const posts = await Astro.glob("../content/blog/**/*.md*")
 const {slug} = Astro.params
-const {Content, frontmatter} = posts.find(
-  (post) => post.frontmatter.slug === slug
-) || {
+const post = posts.find((post) => post.frontmatter.slug === slug) || {
   Content: () => null,
 }
+
+console.log(post.file)
+
+const {Content, frontmatter} = post
+
+const contentPath = `https://github.com/joelhooks/joelhooks-astro/edit/main/src/content/blog${
+  post.file.split("src/content/blog")[1]
+}`
 ---
 
 <!DOCTYPE html>
@@ -54,12 +60,14 @@ const {Content, frontmatter} = posts.find(
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
   </head>
   <body>
     <main class="prose p-2">
       <a href="/">Home</a>
       <h1>{frontmatter.title}</h1>
+      <a href={contentPath} rel="nofollow">
+        <em>edit ✏️</em>
+      </a>
       <Content />
     </main>
   </body>
