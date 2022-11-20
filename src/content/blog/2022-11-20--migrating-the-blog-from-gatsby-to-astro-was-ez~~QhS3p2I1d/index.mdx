@@ -24,7 +24,7 @@ Astro ticks a lot of these boxes, if not all of them.
 
 ## Gatsby
 
-Gatsby was great but has had a lot of issues with strudiness over the years. I've had multiple occasions where nothing but text changes were made and the entire system broke on deploy.
+Gatsby was great but has had a lot of issues with sturdiness over the years. I've had multiple occasions where nothing but text changes were made and the entire system broke on deploy.
 
 Gatsby moved fast, and because of the [MDX (markdown with components)](https://mdxjs.com/) integration, I'd made this site brittle af. It was bleeding edge, and I felt it.
 
@@ -58,7 +58,7 @@ When I used octopress, it used a data driven routing scheme that looked like `/b
 
 With Gatsby, I just dumped the articles in the root like `/slug` and called it a day.
 
-[Astro has a handy filesystem based static routing scheme](https://docs.astro.build/en/core-concepts/routing/#static-routes), but I didn't want to dump a buncy of MDX markdown files into the `pages` folder. With Gatsby, I used a `content` folder to store all of the... content. It is all well structured and has good metadata, but segregated into a `blog` and `legacy_blog` based on the routing schemes I'd used in octopress and Gatsby.
+[Astro has a handy filesystem based static routing scheme](https://docs.astro.build/en/core-concepts/routing/#static-routes), but I didn't want to dump a bunch of MDX markdown files into the `pages` folder. With Gatsby, I used a `content` folder to store all of the... content. It is all well structured and has good metadata, but segregated into a `blog` and `legacy_blog` based on the routing schemes I'd used in octopress and Gatsby.
 
 Thankfully [Astro provides tools for both dynamic routes](https://docs.astro.build/en/core-concepts/routing/#dynamic-routes) AND [loading markdown/mdx files from the file system](https://docs.astro.build/en/reference/api-reference/#astroglob).
 
