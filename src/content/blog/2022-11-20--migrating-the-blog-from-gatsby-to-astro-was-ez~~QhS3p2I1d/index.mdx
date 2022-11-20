@@ -1,0 +1,163 @@
+---
+id: QhS3p2I1d
+slug: migrating-to-astro-was-ez
+date: 2022-11-20
+title: "Migrating the Blog from Gatsby to Astro was EZ"
+published: false
+---
+
+This [digital garden](/digital-garden) has seen several transitions over the years. It started as a [WordPress blog, moved to Octopress (Jekyl)](/blog/2012/07/25/fresh-start-migrating-wordpress-octopress), then moved to [a static site generator called Gatsby](/a-handy-npm-script-for-creating-a-new-gatsby-blog-post), and now it’s an [Astro site](https://astro.build/). 
+
+This is about the process of migrating from [Gatsby](https://www.gatsbyjs.com/) to [Astro](https://astro.build/), and why I chose Astro.
+
+## What's important to me with this site
+
+I want to be able to write when it suits me and not be overly concerned with the technology.
+
+This site needs to be able to take markdown, and spit out HTML. The last thing I want is to try and deploy the site after writing a post and it breaks because of esoteric dependencies in the chain.
+
+This level of sturdiness is at odds with the need for the site to also be technologically interesting. 😅
+
+I want to be able to have fun with it!
+
+Astro ticks a lot of these boxes, if not all of them.
+
+## Gatsby
+
+Gatsby was great but has had a lot of issues with strudiness over the years. I've had multiple occasions where nothing but text changes were made and the entire system broke on deploy.
+
+Gatsby moved fast, and because of the [MDX (markdown with components)](https://mdxjs.com/) integration, I'd made this site brittle af. It was bleeding edge, and I felt it.
+
+While it was fun at the time, the GraphQL "content mesh" approach brings a lot of indirection and hopping back into the site after a period of time was always a learning experience.
+
+[I'm done with GraphQL in general](https://twitter.com/jhooks/status/1580001422988279808?s=20&t=pEceptQJ0sp903TXJB71Qw). It's not the way forward.
+
+At one point my frustration with Gatsby upgrade from version 2 to version 4 had [Kyle Matthews (gatsby CEO) graciously delivering a pull request](https://github.com/joelhooks/joelhooks-com/pull/102) on a Sunday. I was so grateful for the help, but it was a sign 🔮.
+
+It was time to move on.
+
+## Why choose Astro?
+
+Most of my day-to-day work is in the context of Next.js and I really fucking love it. That said, it's a little heavy handed for what I want this site to do, and I also like to try new cool gear.
+
+It keeps the job fun.
+
+Astro is a neat project. It builds on all of the cool things we've used in the past and gives us a clean, well-organized, relatively simple framework for creating text forward static content websites like a blog.
+
+I'd used it previously to created a quick static [micro-site about monorepos](https://www.monorepo.party/), and really enjoyed the experience.
+
+It's perfect for a text driven site like this one.
+
+## Migrating to Astro from Gatsby
+
+Across all of my updates, from wordpress to octopress to gatsby to astro, one of the most important chores is keeping the URLs in tact and bringing along my archive with me and not leaving a trail of 404s across the internet because I was too lazy to do the work.
+
+I've got a stack of static HTML that I exported from wordpress, and it just cut and pastes in the `public` folder.
+
+When I used octopress, it used a data driven routing scheme that looked like `/blog/year/month/day/slug`.
+
+With Gatsby, I just dumped the articles in the root like `/slug` and called it a day.
+
+[Astro has a handy filesystem based static routing scheme](https://docs.astro.build/en/core-concepts/routing/#static-routes), but I didn't want to dump a buncy of MDX markdown files into the `pages` folder. With Gatsby, I used a `content` folder to store all of the... content. It is all well structured and has good metadata, but segregated into a `blog` and `legacy_blog` based on the routing schemes I'd used in octopress and Gatsby.
+
+Thankfully [Astro provides tools for both dynamic routes](https://docs.astro.build/en/core-concepts/routing/#dynamic-routes) AND [loading markdown/mdx files from the file system](https://docs.astro.build/en/reference/api-reference/#astroglob).
+
+Using `getStaticPaths` and `Astro.glob` I was able to parse the `content` folder and generate the routes for the blog posts.
+
+It was really nice to be able to not even think about how the mdx was loaded and just focus on transforming it into my current needs.
+
+Is it dirty-ish? Yes. Does it work. Also yes!
+
+Here's the `[slug].astro` file in the root `pages` folder:
+
+```astro
+---
+import {SEO} from "astro-seo"
+export const getStaticPaths = async () => {
+  const posts = await Astro.glob("../content/blog/**/*.md*")
+
+  return posts.map((post) => ({
+    params: {
+      slug: post.frontmatter.slug,
+    },
+  }))
+}
+
+const posts = await Astro.glob("../content/blog/**/*.md*")
+const {slug} = Astro.params
+const {Content, frontmatter} = posts.find(
+  (post) => post.frontmatter.slug === slug
+) || {
+  Content: () => null,
+}
+---
+
+<!DOCTYPE html>
+```
+
+The "legacy" posts with the data based paths were more complicated, but similar. This had a deeper dynamic route that includes `year`, `month`, `date` and finally `[slug].astro`:
+
+```astro
+---
+import {SEO} from "astro-seo"
+export const getStaticPaths = async () => {
+  //load astro glob with utf-8 encoding
+
+  const posts = await Astro.glob("/src/content/legacy_blog/**/*.md*")
+
+  return posts.map((post) => {
+    const split = post.file.split("/").pop().split(".").shift()
+    const rawFileSplit = /(\d\d\d\d-\d\d-\d\d)(?:-)(.*)/g.exec(split)
+    const [year, month, day] = rawFileSplit?.[1].split("-") || []
+
+    return {
+      params: {
+        slug: rawFileSplit?.[2],
+        year,
+        month,
+        day,
+      },
+    }
+  })
+}
+
+const {slug, year, month, day} = Astro.params
+const posts = await Astro.glob("/src/content/legacy_blog/**/*.md*")
+const {Content, frontmatter} = posts.find((post) => {
+  const split = post.file.split("/").pop().split(".").shift()
+
+  return split === `${year}-${month}-${day}-${slug}`
+}) || {
+  Content: () => null,
+}
+---
+
+<!DOCTYPE html>
+```
+
+Regex capture groups to the rescue on this one, and once the shape was right, it "just worked". 🎉
+
+Once all of the posts were showing up, there were a few more tasks:
+
+* Article Index
+* Home Page
+* SEO Metadata
+* Think about MDX
+
+For things like SEO and Analytics, astro has a solid plugin ecosystem, both official and community, that really helped.
+
+With those things in place, I felt comfortable pushing the Astro version of the site live and writing this post.
+
+I didn't leverage MDX in the past, and now I'm wondering if I need it at all. Thankfully Astro supports MDX seamlessly with an official plugin, so I didn't have to think about it too hard. 
+
+I'm not sure if I'll use it, but it's nice to know it's there.
+
+## What's next?
+
+I didn't migrate the design and plan on working with my long time collaborators on a new design for the site. It'll be simple with readability and ease of use as the core principles driving the vibe. With [ongoing shakeups at Twitter](/15-years-of-twitter-vs-that-one-rich-asshole), I want to use this site as MY place to share thoughts and ideas.
+
+The [IndieWeb principles](https://indieweb.org/principles) are very appealing to me.
+
+Want to chat about Astro or have questions about migrating? 
+
+[Here's a thread on mastodon about this post.](https://hachyderm.io/@joelhooks/109372634174767389)

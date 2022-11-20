@@ -13,6 +13,7 @@ specifiers:
   astro: ^1.6.10
   astro-seo: ^0.6.0
   astro-seo-schema: ^1.2.0
+  moment: ^2.29.4
   prop-types: ^15.8.1
   react: ^18.0.0
   react-dom: ^18.0.0
@@ -20,6 +21,8 @@ specifiers:
   react-twitter-embed: ^4.0.4
   remark-emoji: ^3.0.2
   rollup: ^3.3.0
+  shortid: ^2.2.16
+  slug: ^8.2.2
   tailwindcss: ^3.0.24
   typescript: ^4.9.3
 
@@ -36,6 +39,7 @@ dependencies:
   astro: 1.6.10
   astro-seo: 0.6.0
   astro-seo-schema: 1.2.0_zxittzkcth2pbvtce7yw2eoc3i
+  moment: 2.29.4
   prop-types: 15.8.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -43,6 +47,8 @@ dependencies:
   react-twitter-embed: 4.0.4_biqbaboplfbrettd7655fr4n2y
   remark-emoji: 3.0.2
   rollup: 3.3.0
+  shortid: 2.2.16
+  slug: 8.2.2
   tailwindcss: 3.2.4
   typescript: 4.9.3
 
@@ -3059,6 +3065,10 @@ packages:
     resolution: {integrity: sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==}
     dev: false
 
+  /moment/2.29.4:
+    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
+    dev: false
+
   /mri/1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -3071,6 +3081,10 @@ packages:
 
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
+    dev: false
+
+  /nanoid/2.1.11:
+    resolution: {integrity: sha512-s/snB+WGm6uwi0WjsZdaVcuf3KJXlfGl2LcxgwkEwJF0D/BWzVWAZW/XY4bFaiR7s0Jk3FPvlnepg1H1b1UwlA==}
     dev: false
 
   /nanoid/3.3.4:
@@ -3789,6 +3803,12 @@ packages:
       vscode-textmate: 6.0.0
     dev: false
 
+  /shortid/2.2.16:
+    resolution: {integrity: sha512-Ugt+GIZqvGXCIItnsL+lvFJOiN7RYqlGy7QE41O3YC1xbNSeDGIRO7xg2JJXIAj1cAGnOeC1r7/T9pgrtQbv4g==}
+    dependencies:
+      nanoid: 2.1.11
+    dev: false
+
   /signal-exit/3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
     dev: false
@@ -3820,6 +3840,11 @@ packages:
   /slash/4.0.0:
     resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
     engines: {node: '>=12'}
+    dev: false
+
+  /slug/8.2.2:
+    resolution: {integrity: sha512-5ByW6qXqPeG0Tmlkh24JhdXhvQsbaJSjVr3GgGxUV0BSskZKKBZZfFWxezap8+fh1vxBN9GVbqI1V6nqAFxlBg==}
+    hasBin: true
     dev: false
 
   /source-map-js/1.0.2:
