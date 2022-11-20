@@ -77,7 +77,7 @@ Not that I **always set up custom landing pages** for both the url after they su
 
 Once they subscribe we immediately set a "score" property on the subscriber.
 
-![converkit automation flow with a branch that checks if the user has a score property set and if not sets it to zero to initialize the score](./01-set-score.png)
+![converkit automation flow with a branch that checks if the user has a score property set and if not sets it to zero to initialize the score](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/01-set-score.png)
 
 The first step in the automation checks to see if they have the score property set, and if they don't it sets it to zero so that we can do math on it later and not get an error.
 
@@ -89,7 +89,7 @@ This course will have many modules. We aren't positive how many when we start so
 
 While the content of each module is different the actual steps in the automation are the same and look like this:
 
-![convertkit workflow that shows conditional checking of properties and the resulting routes in the workflow](./02-module.png)
+![convertkit workflow that shows conditional checking of properties and the resulting routes in the workflow](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/02-module.png)
 
 Here we are checking if the user as `completed` or `force completed` the particular module. If they have these tags, we skip the module and move on to the next (which has the same checks and structure).
 
@@ -97,7 +97,7 @@ If they haven't completed the module we add them to the modules email sequence.
 
 Unfortunately, ConvertKit doesn't allow you to send single emails inside of an automation, so we are using sequences that aren't sequences and only send one email.
 
-![screenshot of a sequence](./03-seqeunce.png)
+![screenshot of a sequence](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/03-seqeunce.png)
 
 The sequence is one email and the initial delay is set to 0 which means it sends immediately.
 
@@ -105,7 +105,7 @@ In ConvertKit, when a sequence is within an automation the user **exits the sequ
 
 If the subscriber does nothing at all when the 24 hour delay finishes, they get the `force completed` tag applied.
 
-![](./04-events.png)
+![](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/04-events.png)
 
 When you add an event node inside a ConvertKit automation it does a couple of things:
 

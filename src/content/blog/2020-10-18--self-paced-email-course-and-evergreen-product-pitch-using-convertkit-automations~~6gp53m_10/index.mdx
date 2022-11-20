@@ -97,7 +97,7 @@ We will be using 4 seperate visual automations:
 
 You could do all this in a single automation, but it's not recommended. Convertkit automations are good, but they aren't easy to work with when they start to grow in size. To work around that, we will divide the work into several distinct visual automations which will make the overall process easier to maintain and work with.
 
-![screenshot of the container automation from the convertkit user interface](./convertkit-container-automation.png)
+![screenshot of the container automation from the convertkit user interface](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/convertkit-container-automation.png)
 
 At the top of the Convertkit container automation are the triggers that serve as the entry point to the self-paced email course. This might be a tag being added or submitting a form. 
 
@@ -109,7 +109,7 @@ It's important to note that **moving a subscriber to another automation won't st
 
 The first sub-automation is the self-paced email course itself:
 
-![screenshot of a convertkit automation of a self-paced email course](./self-paced-email-course-in-convertkit.png)
+![screenshot of a convertkit automation of a self-paced email course](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/self-paced-email-course-in-convertkit.png)
 
 When the subscriber enters the course we set a `course score` property and intialize it to 0.
 
@@ -125,11 +125,11 @@ Once the `email course completed` tag is applied the subscriber is advanced in t
 
 Now that we've completed the course we are ready to send them into a transitionary bridge sequence:
 
-![screenshot of a convertkit visual automation of the bridge sequence](./convertkit-bridge-sequence-automation.png)
+![screenshot of a convertkit visual automation of the bridge sequence](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/convertkit-bridge-sequence-automation.png)
 
 The bridge sequence itself is much simpler than the self-paced email course. We check their score, and send them directly into the bridge if they are engaged. If they aren't engaged we send them into a cool sequence before the bridge so that they can have the opportunity to decide if they are aligned with what we have to offer.
 
-![screenshot of the email sequence for the warm bridge](./converkit-bridge-sequence.png)
+![screenshot of the email sequence for the warm bridge](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/converkit-bridge-sequence.png)
 
 The bridge consists of three emails.
 
@@ -147,7 +147,7 @@ They've been through the course. We've provided a smooth transition via the brid
 
 Now it's time to make the offer.
 
-![screenshot of the sales pitch automation in convertkit](./sales-pitch-automation-in-convertkit.png)
+![screenshot of the sales pitch automation in convertkit](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/sales-pitch-automation-in-convertkit.png)
 
 The pitch is our opportunity to convert a subscriber into a paying customer and is the climax of the entire process. This is it. This is where we eat.
 
@@ -209,7 +209,7 @@ It's smart to start simple and iterate on personalization over time. There's alr
 
 The pitch sequence itself consists of 5 emails. The first is set to go on Tuesday morning and the rest follow through Friday
 
-![screenshot of the convertkit email sequence for the pitch](./sales-pitch-sequence-in-convertkit.png)
+![screenshot of the convertkit email sequence for the pitch](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/sales-pitch-sequence-in-convertkit.png)
 
 At each step we are able to access the properties that we set and link to deal that we are offering.
 
