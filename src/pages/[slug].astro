@@ -65,7 +65,7 @@ const contentPath = `https://github.com/joelhooks/joelhooks-astro/edit/main/src/
       {
         frontmatter?.banner && (
           <img
-            src={`https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/${frontmatter.banner}`}
+            src={`https://joelhooks.com${frontmatter.banner}`}
             alt={frontmatter.title}
             class="w-full"
           />

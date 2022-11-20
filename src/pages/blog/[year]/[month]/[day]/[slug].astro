@@ -55,7 +55,7 @@ const contentPath = `https://github.com/joelhooks/joelhooks-astro/edit/main/src/
         basic: {
           title: frontmatter.title,
           type: "article",
-          image: `https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks-opengraph-images.netlify.app/opengraph?title=${encodeURIComponent(
+          image: `https://joelhooks-opengraph-images.netlify.app/opengraph?title=${encodeURIComponent(
             frontmatter.title
           )}&author=${encodeURIComponent("https://twitter.com/jhooks")}&v=${
             process.env.OG_IMAGE_VERSION

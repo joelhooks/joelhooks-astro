@@ -25,11 +25,11 @@ Here's a little life tip, moving across the country and then immediately having 
 
 Individually, both of these activities are intense. They literally disrupt every single aspect of your life, and force you into new and unexpected changes that you _cannot_ get out of.
 
-![man and baby with a bird](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/colors.jpg)
+![man and baby with a bird](https://joelhooks.com/images/colors.jpg)
 
 It takes awhile to get back to any sense of normal after either of these events, and when they are stacked like that it might take a little longer.
 
-![group of people sitting on rock](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/family.jpg)
+![group of people sitting on rock](https://joelhooks.com/images/family.jpg)
 
 These dramatic changes affected the whole family, and 2018 felt like the year we collectively started to even out.
 
@@ -65,7 +65,7 @@ I just like candy. A lot.
 
 So instead of a restrictive diet that dictates what I can eat and/or when I can eat it, I've switch to using a calorie tracking app and simply logging what I eat.
 
-![chart tracking weight loss](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/weight.jpg)
+![chart tracking weight loss](https://joelhooks.com/images/weight.jpg)
 
 For me, this has been fantastic. I've dropped a few pounds, and have a better understanding of how what I eat affects me on a day to day basis. Definitely plan to keep this up throughout 2019.
 
@@ -75,7 +75,7 @@ The last time I lifted weights, or really did any sort of consistent rigorous ph
 
 After having some success with tracking food, I decided that I would work out a bit. I've got a free weight rack in the garage that I had never used (the kids make use of it) so it was convenient to start.
 
-![chart tracking weight lifting](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/lift_weights.jpg)
+![chart tracking weight lifting](https://joelhooks.com/images/lift_weights.jpg)
 
 I used the 5x5 Stronglifts app on iOS to get started. It's a simple program of 5 different lifts. You do squats, overhead presses, bench press, barbell rows, and dead lifts. The program starts you with just the bar, and stacks weight on to each of the exercises every time you encounter them.
 
@@ -86,7 +86,7 @@ Doing this 3x a week, I found the weights increased to heavy quickly, but I'm no
 
 This has had the effect of not being sore at all, progressively better form, and the workouts go relatively quickly.
 
-![chart tracking weight lifting](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/lifting.jpg)
+![chart tracking weight lifting](https://joelhooks.com/images/lifting.jpg)
 
 I personally love that there is no novelty or excitement in my workouts. Now they are just something I do. I still dread them a bit before I do them, but I haven't missed much and when I do it is generally travel related.
 
@@ -108,11 +108,11 @@ What a big step. It's nice to give one of the other kids their own room, but we 
 
 Moving across the country and having a kid throw a real wrench in your social life, but 2018 things started to perk up.
 
-![a bunch of taco fixins](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/buffet.jpg)
+![a bunch of taco fixins](https://joelhooks.com/images/buffet.jpg)
 
 I threw a dinner party or two, got invited over for a dinner party or two, and had lots of great meals and conversations with friends.
 
-![a bunch of taco fixins](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/joel-bone-luge.jpg)
+![a bunch of taco fixins](https://joelhooks.com/images/joel-bone-luge.jpg)
 
 It was nice.
 
@@ -120,7 +120,7 @@ It was nice.
 
 Once again this summer I got to make the annual pilgrimage to learn from Joshua Davis. He taught a great workshop and I was as happy as I've ever been with the images that I created.
 
-![abstract computer generated art](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/art.jpg)
+![abstract computer generated art](https://joelhooks.com/images/art.jpg)
 
 These were done in processing and used computer vision as the input so the camera on my laptop scanned the room watching for movement and color to affect changes on the variables that generate the imagery.
 
@@ -130,7 +130,7 @@ Before September I'd never met the designer I work with on a daily basis in pers
 
 We'd actually never even spoken. Hah
 
-![a bunch of eggheads](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/team_prague.jpg)
+![a bunch of eggheads](https://joelhooks.com/images/team_prague.jpg)
 
 The internet, right??
 
@@ -148,11 +148,11 @@ It's the start of a new line of business for us, and a way for the content creat
 
 For the first time in a decade I don't work at home. For the last 10 years I've monopolized the dining room of our houses to get work done. This year I wanted to get that space back as well as provide some seperation between work and home so I rented a small office about 8 minutes from home.
 
-![a television and a white board with various writing](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/officespace.jpg)
+![a television and a white board with various writing](https://joelhooks.com/images/officespace.jpg)
 
 It's been great actually. And the best part might be having the space back in our home for just chilling out and listening to records.
 
-![a room with several chairs and vinyl records](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/listening.jpg)
+![a room with several chairs and vinyl records](https://joelhooks.com/images/listening.jpg)
 
 We enjoy it quite a lot.
 
@@ -160,11 +160,11 @@ We enjoy it quite a lot.
 
 Well, once you get started, might as well go all in?
 
-![a tattoo of rainbows shooting out of an ocilloscope into space](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/spacescope.jpg)
+![a tattoo of rainbows shooting out of an ocilloscope into space](https://joelhooks.com/images/spacescope.jpg)
 
 This one is from Winston the Whale in Portland. It is what it is ;)
 
-![a tattoo of cartoon cats](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/cat.jpg)
+![a tattoo of cartoon cats](https://joelhooks.com/images/cat.jpg)
 
 This one is from Jiran of our three cats. Rat, the white one, actually passed away this year. Cyan pointed out that Comet, the orange cat, does NOT have a tail IRL. She says "It's OK, he'll be dead in a few years and we can just pretend."
 
@@ -172,7 +172,7 @@ WTF? lol
 
 I just call him "not comet" and try not to think about it.
 
-![a tattoo JUST FUCKIN DO IT](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/jfdi_tat.jpg)
+![a tattoo JUST FUCKIN DO IT](https://joelhooks.com/images/jfdi_tat.jpg)
 
 The JFDI means Just Fucking Do It, and is something that my friend Alex Hillman has had on his arm for years. I wanted a similar reminder for myself, and to point at the kids so I asked if he minded if I copied his tattoo.
 
@@ -186,7 +186,7 @@ Built one thing.
 
 Now it's just a table sitting in the garage.
 
-![a garage with a table saw and another table](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/unused.jpg)
+![a garage with a table saw and another table](https://joelhooks.com/images/unused.jpg)
 
 This is still something I want to do, but building a wood shop is a slippery slope. Space is limited. Need more tools… blah blah
 

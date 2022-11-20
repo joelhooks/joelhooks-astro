@@ -20,13 +20,13 @@ After the email is sent, it waits for 24 hours unless the customer enters the se
 
 In both cases the "C: Emailing" segment is removed after the "wait until" is completed.
 
-![customerio workflow interface](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/workflow_one.png)
+![customerio workflow interface](https://joelhooks.com/images/workflow_one.png)
 
 
 "C: Quiz Activity" and "C: Forced Advancement" both send the customer to Course: Progress campaign. This campaign does a little house keeping, updates the "engagement attribute" if they did the quiz, and adds them back to "C: Emailing" segment before removing the segment that they arrived in this campaign with.
 
 It's assumed that the "op_state" will be updated accordingly from an external source so the user will be routed to the right "channel" in the Emailing workflow.
 
-![customerio workflow interface](https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks.com/images/workflow_two.png)
+![customerio workflow interface](https://joelhooks.com/images/workflow_two.png)
 
 The looping seems to make sense but is probably the weirdest part of the overall flow but the "switch/case" node is too good to pass up for a little state machine type workflow.
