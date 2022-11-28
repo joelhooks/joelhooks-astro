@@ -20,6 +20,8 @@ const post = posts.find((post) => post.frontmatter.slug === slug) || {
 
 const {Content, frontmatter} = post
 
+console.log({frontmatter})
+
 const contentPath = `https://github.com/joelhooks/joelhooks-astro/edit/main/src/content/blog${
   post.file.split("src/content/blog")[1]
 }`
@@ -43,11 +45,9 @@ const contentPath = `https://github.com/joelhooks/joelhooks-astro/edit/main/src/
         basic: {
           title: frontmatter.title,
           type: "article",
-          image: `https://res.cloudinary.com/badass-courses/image/fetch/v1665602232/https://joelhooks-opengraph-images.netlify.app/opengraph?title=${encodeURIComponent(
+          image: `https://joelhooks-opengraph-images.netlify.app/opengraph?title=${encodeURIComponent(
             frontmatter.title
-          )}&author=${encodeURIComponent("https://twitter.com/jhooks")}&v=${
-            process.env.OG_IMAGE_VERSION
-          }`,
+          )}&author=${encodeURIComponent("https://twitter.com/jhooks")}&v=420`,
         },
         optional: {
           description: frontmatter.description,
@@ -71,7 +71,7 @@ const contentPath = `https://github.com/joelhooks/joelhooks-astro/edit/main/src/
           />
         )
       }
-      <h1>{frontmatter.title}</h1>
+      <h1 class="pt-6">{frontmatter.title}</h1>
       <a href={contentPath} rel="nofollow">
         <em>edit ✏️</em>
       </a>
