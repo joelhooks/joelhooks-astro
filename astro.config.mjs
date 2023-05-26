@@ -26,7 +26,7 @@ import partytown from "@astrojs/partytown";
 export default defineConfig({
   site: 'https://joelhooks.com',
   integrations: [tailwind(), mdx({
-    remarkPlugins: [remarkEmoji, remarkInlineLinks, remarkGfm],
+    remarkPlugins: [remarkEmoji, remarkInlineLinks, remarkGfm, remarkEmbedImages],
     extendPlugins: false
   }), react(), sitemap(), prefetch(), partytown()]
 });
