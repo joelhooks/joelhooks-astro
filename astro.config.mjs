@@ -8,9 +8,10 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 import react from "@astrojs/react";
-import remarkEmoji from 'remark-emoji';
+import remarkEmoji from '@fec/remark-a11y-emoji';
 import remarkInlineLinks from 'remark-inline-links';
 import remarkGfm from 'remark-gfm';
+import remarkEmbedImages from 'remark-embed-images'
 
 // https://astro.build/config
 import sitemap from "@astrojs/sitemap";
