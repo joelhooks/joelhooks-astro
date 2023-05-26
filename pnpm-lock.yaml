@@ -20,6 +20,8 @@ specifiers:
   react-responsive-embed: ^2.1.0
   react-twitter-embed: ^4.0.4
   remark-emoji: ^3.0.2
+  remark-gfm: ^3.0.1
+  remark-inline-links: ^6.0.1
   rollup: ^3.3.0
   shortid: ^2.2.16
   slug: ^8.2.2
@@ -46,6 +48,8 @@ dependencies:
   react-responsive-embed: 2.1.0_sh5qlbywuemxd2y3xkrw2y2kr4
   react-twitter-embed: 4.0.4_biqbaboplfbrettd7655fr4n2y
   remark-emoji: 3.0.2
+  remark-gfm: 3.0.1
+  remark-inline-links: 6.0.1
   rollup: 3.3.0
   shortid: 2.2.16
   slug: 8.2.2
@@ -3578,6 +3582,15 @@ packages:
       unified: 10.1.2
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /remark-inline-links/6.0.1:
+    resolution: {integrity: sha512-etdk1A0kRs+bXtT41XEFfyePOu583cmuHDF8bhAUfHJeCAPbPZpqmqZHD/wLhijIJV3ldjIvO4irM0jRGb1Dhg==}
+    dependencies:
+      '@types/mdast': 3.0.10
+      mdast-util-definitions: 5.1.1
+      unified: 10.1.2
+      unist-util-visit: 4.1.1
     dev: false
 
   /remark-mdx/2.1.5:

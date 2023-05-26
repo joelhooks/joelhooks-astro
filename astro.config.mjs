@@ -9,6 +9,8 @@ import mdx from "@astrojs/mdx";
 // https://astro.build/config
 import react from "@astrojs/react";
 import remarkEmoji from 'remark-emoji';
+import remarkInlineLinks from 'remark-inline-links';
+import remarkGfm from 'remark-gfm';
 
 // https://astro.build/config
 import sitemap from "@astrojs/sitemap";
@@ -23,7 +25,7 @@ import partytown from "@astrojs/partytown";
 export default defineConfig({
   site: 'https://joelhooks.com',
   integrations: [tailwind(), mdx({
-    remarkPlugins: [remarkEmoji],
+    remarkPlugins: [remarkEmoji, remarkInlineLinks, remarkGfm],
     extendPlugins: false
   }), react(), sitemap(), prefetch(), partytown()]
 });
