@@ -1,0 +1,68 @@
+---
+id: TKGRHR04k
+slug: self-hosting
+date: 2023-05-29
+title: "Self Hosting Technical Infrastructure"
+published: false
+status: sprouting
+---
+This is a work in progress guide to self hosting your own technical infrastructure for personal and business use. This guide is meant to be a living document and will be updated as I learn more about self hosting. 
+
+On the modern internet most of our infrastructure is done for us. We connect to services and they "just work". It's great. We don't have to think deeply on how the DNS sausage is made, and for the most part this is good. It provides more access and allows the world to work and connect without having to think too hard about it.
+
+For me personally this has meant that it was even possible to build a long-term business on the internet. As a software as a service consumer the level of abstraction I am afforded to think about "higher level" problems is huge. For the most part I've been able to avoid infrastructure level problems and focus on the delivery end of the stack.
+
+## Does it make sense to self host?
+
+[![tweet from jared palmer that asks "y tho?" in response to my tweet discussing setting up kubernetes on a local machine](https://res.cloudinary.com/joelhooks/image/upload/v1685380440/jared-palmer-asks-y-tho_ravwny.png)](https://twitter.com/jaredpalmer/status/1661844107164106754?s=20)
+
+Have you ever used a service that you really enjoyed which then got acquired by a larger business only to be either ruined or shut down completely?
+
+It sucks.
+
+Have you ever explored wood working or some other hobby that has been completely obviated by just-in-time logistics and Amazon Prime? 
+
+Maybe you've grown some vegetables to eat and share?
+
+It's work, sometimes challenging work that requires rolling up your sleaves to what can only be described as failure.
+
+But when you pull it off... holy shit, feels good.
+
+For me, exploring self-hosting is a way that I can get my hands dirty and take more responsibility for the technical infrastructure that we mostly take for granted both personally and professionally.
+
+It's an extension of my [digital garden](/digital-garden), providing me with more control and autonomy over ever expanding data and media.
+
+## Building a Data Center in your House
+
+The range here is Raspberry Pi with an SD card up to server racks in the basement with custom HVAC.
+
+I started with a gaming PC that I wasn't using much. It was well spec'd several years ago when I built it, but isn't anything particularly special. I did drop the NVidia 3090 gamin card in favor of a pair of NVidia a4500s to explore GPU focused projects that are somewhat related.
+
+The splurge for me was a beefy NAS (network attached storage).
+
+* [Asustor Lockerstor 8 AS6508T](https://amzn.to/43AWpgd) - This is a modern, powerful, full-featured appliance in a reasonable form factor that fits on a shelf. 
+* 8x [Seagate IronWolf 10TB NAS Internal Hard Drive HDD](https://amzn.to/3ovSzGi) - 10tb drives for $250 blows my mind. The IronWolf drives are built to be dropped into a NAS.
+* 2x [Seagate IronWolf 525 SSD 2TB NAS Internal Solid State Drive - SATA M.2](https://amzn.to/3OJE38k) - the Asustor NAS has two M.2 slots so we can take advantage of that performance. They are more expensive, but we are maxing the NAS out.
+* [NETGEAR 8-Port 10G Multi-Gigabit Ethernet Unmanaged Switch](https://amzn.to/43yN0Wa) - 10G ethernet is fast af and means I can edit photos and video directly from the NAS and that's cool af so now I've got 10G ethernet.
+
+## Self-Hosting Resources
+
+Here are some of the most useful resources that I've come across for self hosting.
+
+### Self Hosting Guide
+
+This is a lifetime of material to explore.
+
+> Self-Hosting is the practice of locally hosting(on premises & private web servers) and managing software applications by a person or organization instead of monthly subscriptions from Software as a service (SaaS) providers.
+
+https://github.com/mikeroyal/Self-Hosting-Guide
+
+### Kubernetes
+
+Kubernetes (k8s) is intimidating, but I've found it to be approachable and interesting for self hosting. You can run k8s on a Raspberry Pi, an old gaming computer, or a cloud provider.
+
+In some ways it [reminds me of Vim, where you'll install it and use somebody's dotfiles or follow a tutorial and add ALL of the plugins](/blog/2013/04/23/5-essential-vim-plugins/), only to be left with a confusing soup of keybindings and features that you don't understand. 🤡
+
+If you take a step back and start small, you can learn the basics and build up from there.
+
+[Set up a free Dynamic DNS service with ddclient on Kubernetes](https://codeburst.io/ddclient-c9a6ac1d8f81). This was a good starting point for a useful service that I could run on my k8s cluster.
