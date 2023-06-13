@@ -183,7 +183,7 @@ This also requires issuers to be set up. I'm using Let's Encrypt, so I followed 
 
 One big note here is that the `ingressClassName` needs to be `public` instead of `nginx` as the docs suggest. This is because we are using the MicroK8s ingress controller instead of the Nginx ingress controller.
 
-```bash
+```yaml
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
