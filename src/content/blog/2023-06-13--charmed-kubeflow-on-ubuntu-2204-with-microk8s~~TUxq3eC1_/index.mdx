@@ -1,0 +1,375 @@
+---
+id: TUxq3eC1_
+slug: charmed-kubeflow-on-ubuntu-2204-with-microk8s
+date: 2023-06-13
+title: "Charmed Kubeflow on Ubuntu 22.04 with MicroK8s"
+published: false
+status: sprouting
+---
+
+This is a collection of notes on how to get KubeFlow running on Ubuntu 22.04 with MicroK8s. I'll add to it over time and try to fill in some of the resources that have been most useful.
+
+PRs to this post welcome!
+
+## Ubuntu System
+
+I started out with SSD and 64gb of RAM and over the course of the build ended up with nv.me and 128gb of RAM.  I would recommend starting with the latter. 😅
+
+This machine has two NVidia a4500 GPUs since the purpose here is to run ML workloads and pipeline in Kubeflow.
+
+Remove apache2 right out of the gate:
+
+```bash
+sudo apt remove apache2
+sudo apt autoremove
+```
+
+I'm using SSH and connectiong to Ubuntu from my Macbook Pro. It's more ergonomic for me to work that way, but I still installed Ubuntu desktop so that I can use the GUI for some things. Very handy for trouble shooting.
+
+```bash
+sudo apt update
+sudo apt install openssh-server curl build-essential
+```
+
+```bash
+# Install Git
+sudo apt install git
+
+# Configure Git
+git config --global user.name "Joel Hooks"
+git config --global user.email "joel@pissoff.party"
+git config --global init.defaultBranch 'main'
+git config --global credential.helper store
+```
+
+I set the machine up with tools that I like such as [zsh](https://ohmyz.sh/), [neovim](https://neovim.io/), [github cli](https://cli.github.com/), [atuin](https://github.com/ellie/atuin), [nodenv](https://github.com/nodenv/nodenv), and other bits and bobs that I personallylike to have on hand, but aren't essential to this process. 
+
+We are also using Tailscale, so I set that up:
+
+```bash
+curl -fsSL https://tailscale.com/install.sh | sh
+```
+
+### NVidia Drivers
+
+You can list the available drivers with:
+
+```bash
+ubuntu-drivers devices
+```
+
+At the time `nvidia-driver-530` was the latest driver. I installed it with:
+
+```bash
+sudo apt install nvidia-driver-530
+sudo reboot now
+```
+
+Now we'll install the CUDA toolkit:
+
+```bash
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.0-1_all.deb
+sudo dpkg -i cuda-keyring_1.0-1_all.deb
+sudo apt-get update
+sudo apt-get -y install cuda
+sudo apt-get -y install nvidia-gds
+```
+
+From here you should be able to run `nvidia-smi` and see the GPUs!
+
+You need to add cuda to your path:
+
+```bash
+export PATH="/usr/local/cuda/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+```
+
+These go in your `.zshrc` or `.bashrc` file (or wherever you keep that stuff).
+
+Go ahead and reboot again.
+
+```bash
+sudo reboot now
+```
+
+### Docker and the NVIDIA Container Toolkit
+
+Some documentation here: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#installation-guide
+
+Just let them handle the install:
+
+```bash
+curl https://get.docker.com | sh \
+  && sudo systemctl --now enable docker
+```
+
+```bash
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+      && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+      && curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
+            sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+            sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+``` 
+
+```bash
+sudo apt-get update
+sudo apt-get install -y nvidia-container-toolkit
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+sudo docker run --rm --runtime=nvidia --gpus all nvidia/cuda:11.6.2-base-ubuntu20.04 nvidia-smi
+```
+
+This should output the `nvidia-smi` output that shows the GPUs in the machine.
+
+🎉
+
+## MicroK8s
+
+MicroK8s is a single node Kubernetes cluster that is easy to install and manage. It's a great way to get started with Kubernetes. It's fuckin cool tbh.
+
+We are mostly following along with this guide: https://charmed-kubeflow.io/docs/get-started-with-charmed-kubeflow
+
+```bash
+sudo snap install microk8s --classic --channel=1.24/stable
+```
+
+Note that we specified a version for the install that is NOT the latest version. This is because Kubeflow has specific requirements and the latest MicroK8s doesn't run it properly, so we pegged to a specific known working version.
+
+We need to set up some permissions for MicroK8s on the system and join a group:
+
+```bash
+sudo usermod -a -G microk8s $USER
+newgrp microk8s
+
+sudo chown -f -R $USER ~/.kube
+microk8s config > ~/.kube/config
+```
+
+This copies the config into our home directoy. There are instructions for how to manage this when multiple users are on the system and it requires some additional work.
+
+Fire up some MicroK8s goodies:
+
+```bash
+microk8s enable dns gpu hostpath-storage host-access ingress metallb:10.64.140.43-10.64.140.49
+microk8s status --wait-ready
+```
+
+This differs from the docs because we added `gpu` because we have GPUs available. DNS, storage, ingress, and the load balancer are all required to run Kubeflow.
+
+Generally I let this settle a bit before I do anything else and monitor the pods as they spin up:
+
+```bash
+watch -n 1 microk8s kubectl get pods --all-namespaces
+```
+
+I also like to use a tool like btop to monitor the system resources:
+
+```bash
+sudo snap install btop
+```
+
+That helps get a feel for the whole thing as we proceed.
+
+### cert-manager
+
+We need to install cert-manager to manage the TLS certificates for the cluster. This isn't a requirement for Kubeflow, but it's great to have in place.
+
+```bash
+helm repo add jetstack https://charts.jetstack.io
+helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set installCRDs=true
+```
+
+This also requires issuers to be set up. I'm using Let's Encrypt, so I followed the instructions here: https://cert-manager.io/docs/configuration/acme/
+
+One big note here is that the `ingressClassName` needs to be `public` instead of `nginx` as the docs suggest. This is because we are using the MicroK8s ingress controller instead of the Nginx ingress controller.
+
+```bash
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    email: jyouremail@example.com # change this
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    solvers:
+    - http01:
+        ingress:
+          class: public
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: youremail@example.com # change this
+    privateKeySecretRef:
+       name: letsencrypt-prod
+    solvers:
+    - http01:
+        ingress:
+          class: public
+```
+
+Save that to a `letsencrypt-issuer.yaml` file and apply it:
+
+```bash
+microk8s kubectl apply -f letsencrypt-issuer.yaml
+```
+
+💡 set aliases for `microk8s kubectl` and `microk8s helm3` to make your life easier!
+
+### Kubeflow
+
+You could stop here and mess around for awhile. It's a good stopping point before we dump Kubeflow onto the system, which is pretty heavy. You can set it up and tear it down as needed wothout breaking things (very much), which is a cool feature of Kubernetes in general.
+
+Charmed Kubeflow is a straight forward way to stand up Kubeflow inside of MicroK8s. It uses Juju, which is a tool for managing Kubernetes applications. This shit is a black box still to me. 
+
+```bash
+sudo snap install juju --classic --channel=2.9/stable
+```
+
+We are spcifying a version of Juju here as well because that's the way it needs to be. All of these steps take a minute. I like to watch `btop` and `microk8s kubectl get pods -A -w` to see everything roll in.
+
+```bash
+juju bootstrap microk8s
+juju add-model kubeflow
+```
+
+Now run these magic numbers:
+
+```bash
+sudo sysctl fs.inotify.max_user_instances=1280
+sudo sysctl fs.inotify.max_user_watches=655360
+```
+
+Kubeflow is doing a lot of shit and needs to have some defaults boosted on the system. It's beyond my understanding, but it seems to work.
+
+Alright, now we are ready to kick off Kubeflow. This can take about an hour, so don't sweat it. I like to take a walk and think about The Cloud while it runs.
+
+```bash
+juju deploy kubeflow --trust  --channel=1.7/stable
+```
+
+Once this is going, we can also watch the Kubeflow pods Juju is controlling:
+
+```bash
+watch -c 'juju status --color | grep -E "blocked|error|maintenance|waiting|App|Unit"'
+```
+
+If you're watching it and notice the pod named `tensorboard-controller` stuck in a state labeld `Waiting for gateway relation` run this to kick it into gear:
+
+```bash
+juju run --unit istio-pilot/0 -- "export JUJU_DISPATCH_PATH=hooks/config-changed; ./dispatch"
+```
+
+It's an [upstream issue](https://github.com/canonical/bundle-kubeflow/issues/488) and consistently popped up for me.
+
+### Kubeflow Dashboard
+
+In the Kubeflow Tutorial they show you how to get the dashbboard up and running on the mmachine that you've installed Kubeflow on, which is fine, but I wanted to access the dashboard from anywhere, all the time. So much fucking MLops. Globally.
+
+For that we need a couple fo things in place. First you'll need a domain that resolves to your machine's public IP address. There are loads of dynamic DNS services (gamers use them a lot, for instance) and you can use something like [Kubesail to deploy a nice little pod on your new Kubernetes cluster to monitor for DNS changes and update your provider](https://kubesail.com/template/loopDelicious/ddclient). I used Cloudflare, and it worked great.
+
+You can also figure out your IP address manually and point an `a` record of any domain or sub-domain you own at that IP. This isn't as durable, or as fun, but it works to get started.
+
+**DNS resolvable top-level domains are foundational to all of this, so getting this part working was important to me.**
+
+To get access to my Kubeflow dashboard externally at a resolvable domain, I created an ingress:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubeflow-dashboard-ingress
+  namespace: kubeflow
+  labels:
+    app: istio-ingressgateway
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    # this starts with `letsencrypt-staging` so we can test it out
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+spec:
+  # this needs to be `public` and not `nginx`!
+  ingressClassName: public
+  tls:
+  - hosts:
+    - your.cool-domain.com
+    secretName: tls-secret
+  rules:
+  - host: your.cool-domain.com
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              # this is the service that the ingress will route to
+              # NOT the istio-ingressgateway
+              name: istio-ingressgateway-workload
+              port:
+                number: 80
+```
+
+Save that as `whatever.yaml` and apply it:
+
+```bash
+microk8s kubectl apply -f whatever.yaml
+```
+
+Assuming your domain is pointing at your machine's public IP address, you should be able to access the dashboard at `https://your.cool-domain.com`. 
+
+Just kidding. There's still more to do. 🤡
+
+YOu can check to see the status of the underlying Let's Encrypt certificate with this:
+
+```bash
+microk8s kubectl describe -nkubeflow certificate tls-secret
+```
+
+You can also look at the ClusterIssuer to see what's going on there:
+
+```bash
+microk8s kubectl describe clusterissuer letsencrypt-staging
+```
+
+Assuming the DNS can resolve, it should work and you''ll see something that tells you the ready status is `TRUE` and you'll know it's cool to switch the yample to use `letsencrypt-prod` instead of `letsencrypt-staging` and apply it again.
+
+```bash
+microk8s kubectl apply -f whatever.yaml
+```
+
+
+This [Stack Overflow answer](https://stackoverflow.com/questions/67430592/how-to-setup-letsencrypt-with-kubernetes-microk8s-using-default-ingress/67430593#67430593) is an excellent reference.
+
+Now, you need to tell Kubeflow what the domain is through this config:
+
+```bash
+juju config dex-auth public-url=https://your.cool-domain.com
+juju config oidc-gatekeeper public-url=https://your.cool-domain.com
+
+juju config dex-auth static-username=admin
+juju config dex-auth static-password=admin
+```
+
+You can watch all the dashboards and you'll see the `oidc-gatekeeper` pod restart and then you'll be able to log in with the username and password you set above.
+
+## Tearing it all down
+
+One noce thing is that wiping the whole thing and rebuilding it is straight forward. I had to do this dozens of times and wrote this post as a way to remember all the steps. 
+
+```bash
+sudo snap remove microk8s --purge; juju unregister -y microk8s-localhost
+sudo snap remove --purge  juju                                        
+rm -rf ~/.local/share/juju
+```
+
+Gone.
+
+## What can you use Kubeflow for?
+
+I'll let ChatGPT answer that. I dunno, do whatever you want! Let me know.
