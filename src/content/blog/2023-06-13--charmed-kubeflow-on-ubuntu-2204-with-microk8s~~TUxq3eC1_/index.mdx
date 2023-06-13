@@ -175,8 +175,8 @@ That helps get a feel for the whole thing as we proceed.
 We need to install cert-manager to manage the TLS certificates for the cluster. This isn't a requirement for Kubeflow, but it's great to have in place.
 
 ```bash
-helm repo add jetstack https://charts.jetstack.io
-helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set installCRDs=true
+microk8s helm3 repo add jetstack https://charts.jetstack.io
+microk8s helm3 install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set installCRDs=true
 ```
 
 This also requires issuers to be set up. I'm using Let's Encrypt, so I followed the instructions here: https://cert-manager.io/docs/configuration/acme/
