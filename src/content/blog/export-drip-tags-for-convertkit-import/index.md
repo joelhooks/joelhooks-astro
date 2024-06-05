@@ -7,7 +7,7 @@ featured: false
 published: true
 ---
 
-If you need to migrate your email list subscribers from Drip to [Convertkit](https://convertkit.com?lmref=ia534A), you will run into the problem of importing each of your tags as an individual list into [Convertkit](https://convertkit.com?lmref=ia534A).
+If you need to migrate your email list subscribers from Drip to [Convertkit](https://partners.convertkit.com/4xxwjvqn59fl), you will run into the problem of importing each of your tags as an individual list into [Convertkit](https://partners.convertkit.com/4xxwjvqn59fl).
 
 If you follow the [official recommendation][^1], they suggest that you export each individual tag from Drip. With each export taking 3 minutes to 12 hours, you could be there for a long long time.
 
