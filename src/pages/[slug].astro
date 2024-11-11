@@ -1,9 +1,20 @@
 ---
 import {SEO} from "astro-seo"
-export const getStaticPaths = async () => {
-  //load astro glob with utf-8 encoding
 
-  const posts = await Astro.glob("../content/blog/**/*.md*")
+  type BlogPost = {
+    frontmatter: {
+      slug: string
+      title: string
+      description?: string
+      banner?: string
+    }
+    file: string
+    Content: () => any
+  }
+export const getStaticPaths = async () => {
+
+
+  const posts = await Astro.glob<BlogPost>("../content/blog/**/*.md*")
 
   return posts.map((post) => ({
     params: {
@@ -12,7 +23,7 @@ export const getStaticPaths = async () => {
   }))
 }
 
-const posts = await Astro.glob("../content/blog/**/*.md*")
+const posts = await Astro.glob<BlogPost>("../content/blog/**/*.md*")
 const {slug} = Astro.params
 const post = posts.find((post) => post.frontmatter.slug === slug) || {
   Content: () => null,
@@ -20,7 +31,15 @@ const post = posts.find((post) => post.frontmatter.slug === slug) || {
 
 const {Content, frontmatter} = post
 
-console.log({frontmatter})
+const sanitizeTitle = (title: string) => {
+  return title
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .trim()
+}
+
+const ogImage = `https://res.cloudinary.com/badass-courses/image/upload/w_1200,h_630,c_fill,f_auto/w_1100,h_450,c_fit,co_rgb:FFFFFF,g_west,x_45,y_-40,l_text:Roboto_60_left_bold:${encodeURIComponent(
+  sanitizeTitle(frontmatter.title)
+)}/v1731348595/social-image-templates/joelhooks-com_sdeoc5.png`
 
 const contentPath = `https://github.com/joelhooks/joelhooks-astro/edit/main/src/content/blog${
   post.file.split("src/content/blog")[1]
@@ -45,9 +64,7 @@ const contentPath = `https://github.com/joelhooks/joelhooks-astro/edit/main/src/
         basic: {
           title: frontmatter.title,
           type: "article",
-          image: `https://res.cloudinary.com/badass-courses/image/upload/w_1200,h_630,c_fill,f_auto/w_1100,h_450,c_fit,co_rgb:FFFFFF,g_west,x_45,y_-40,l_text:Roboto_60_left_bold:${encodeURIComponent(
-            frontmatter.title
-          )}/v1731348595/social-image-templates/joelhooks-com_sdeoc5.png`,
+          image: ogImage,
         },
         optional: {
           description: frontmatter.description,
