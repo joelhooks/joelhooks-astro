@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>A Nacht to Remember - D&D One-Shot Adventure</title>
+    <style>
+        /* Print-optimized styles */
+        @page {
+            size: letter;
+            margin: 0.5in;
+            @bottom-center { 
+                content: counter(page);
+                font-family: Georgia, serif;
+            }
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                font-size: 10pt;
+                line-height: 1.4;
+                color: #000;
+                background: #fff;
+            }
+
+            /* Ensure proper page breaks */
+            h1, h2 {
+                page-break-before: always;
+                page-break-after: avoid;
+                color: #58180D;
+            }
+
+            h3, h4 {
+                page-break-after: avoid;
+                color: #58180D;
+            }
+
+            /* Keep important blocks together */
+            .read-aloud, .key-info, .stat-block, table {
+                page-break-inside: avoid;
+            }
+
+            /* Two-column layout for print */
+            .two-col {
+                column-count: 2;
+                column-gap: 0.25in;
+                orphans: 3;
+                widows: 3;
+            }
+
+            /* Color optimization for print */
+            .read-aloud {
+                background: #FFF6E5 !important;
+                padding: 0.2in;
+                margin: 0.1in 0;
+                border-radius: 4px;
+            }
+
+            .stat-block {
+                background: #F4F4F4 !important;
+                border: 1px solid #58180D !important;
+                padding: 0.2in;
+                margin: 0.1in 0;
+            }
+
+            .key-info {
+                padding: 0.1in 0;
+                margin: 0.1in 0;
+            }
+
+            /* Table optimization */
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin: 0.1in 0;
+                border: 1px solid #58180D !important;
+            }
+
+            th {
+                background: #58180D !important;
+                color: #fff !important;
+                padding: 0.1in;
+            }
+
+            td {
+                border-bottom: 1px solid #58180D !important;
+                padding: 0.1in;
+            }
+
+            /* Links and references */
+            a {
+                color: #000 !important;
+                text-decoration: none;
+            }
+
+            /* Notes and important text */
+            .note {
+                color: #666 !important;
+                font-style: italic;
+            }
+
+            .important {
+                color: #58180D !important;
+                font-weight: bold;
+            }
+        }
+
+        /* Base styles (non-print) remain unchanged */
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.4;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #8B0000;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .two-col {
+            column-count: 2;
+            column-gap: 40px;
+            margin-bottom: 2em;
+        }
+
+        .key-info {
+            break-inside: avoid;
+            margin-bottom: 1em;
+        }
+
+        .key-info ul {
+            margin-top: 0.5em;
+            padding-left: 1.5em;
+        }
+
+        .key-info li {
+            margin-bottom: 0.5em;
+        }
+
+        .key-info strong {
+            color: #4A4A4A;
+        }
+
+        /* Two-column layout containers */
+        .two-col {
+            column-count: 2;
+            column-gap: 2em;
+            margin: 1em 0;
+            break-inside: avoid-column;
+        }
+
+        .two-col > * {
+            break-inside: avoid;
+        }
+
+        /* Single column override */
+        .single-col {
+            column-count: 1 !important;
+        }
+
+        /* Headers */
+        h1, h2, h3, h4 {
+            font-family: "Palatino", serif;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            page-break-after: avoid;
+            color: #58180D;
+            column-span: all;
+        }
+
+        h1 { 
+            font-size: 24pt;
+            text-align: center;
+            border-bottom: 2px solid #58180D;
+        }
+
+        h2 { 
+            font-size: 18pt;
+            border-bottom: 1px solid #58180D;
+        }
+
+        h3 { 
+            font-size: 14pt;
+        }
+
+        h4 { 
+            font-size: 12pt;
+            font-style: italic;
+        }
+
+        /* Content blocks */
+        .read-aloud {
+            background: #FFF6E5;
+            padding: 1em;
+            margin: 1em 0;
+            font-style: italic;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            column-span: all;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .stat-block {
+            background: #F4F4F4;
+            border: 1px solid #58180D;
+            padding: 1em;
+            margin: 1em 0;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .key-info {
+            padding: 0.5em 0;
+            margin: 1em 0;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        /* Only add borders to key-info when it contains tables or needs visual separation */
+        .key-info table {
+            border: 1px solid #58180D;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        th {
+            background: #58180D;
+            color: #fff;
+            text-align: left;
+            padding: 0.5em;
+        }
+
+        td {
+            border-bottom: 1px solid #58180D;
+            padding: 0.5em;
+        }
+
+        /* Lists */
+        ul, ol {
+            padding-left: 1.5em;
+            margin: 0.5em 0;
+            break-inside: avoid;
+        }
+
+        li {
+            margin: 0.25em 0;
+            break-inside: avoid;
+        }
+
+        /* Special elements */
+        .important {
+            color: #58180D;
+            font-weight: bold;
+        }
+
+        .note {
+            font-style: italic;
+            color: #666;
+            margin: 0.5em 0;
+        }
+
+        /* Print-specific adjustments */
+        @media print {
+            body {
+                padding: 0;
+            }
+
+            .major-section {
+                page-break-before: always;
+            }
+
+            .read-aloud, .key-info, .stat-block, table {
+                page-break-inside: avoid;
+            }
+
+            .important {
+                color: #000;
+                font-weight: bold;
+                text-decoration: underline;
+            }
+
+            /* Ensure two-column layout prints properly */
+            .two-col {
+                column-count: 2 !important;
+                column-gap: 2em !important;
+            }
+
+            .single-col {
+                column-count: 1 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>A Nacht to Remember</h1>
+    <p class="subtitle"><em>A one-shot holiday adventure for 5th-level characters (3 hours)</em></p>
+
+    <div class="major-section">
+        <h2>1. Introduction</h2>
+        
+        <h3>1.1 Background</h3>
+        <div class="key-info">
+            Deep in the frozen north lies the Cave of Punishment, an ancient place where Krampus—a demon who punishes the wicked during the darkest nights of winter—carries out his grim work. Above the caves stands the keep of Lord Klaus, a powerful archmage known for his arcane research and seasonal generosity. On this winter solstice night, something has gone terribly wrong.
+        </div>
+
+        <div class="read-aloud">
+            Your head throbs as consciousness returns. The last thing you remember is clearing that disgusting well in Phandalin, the stench of the monsters you defeated still clinging to your clothes. But now... something is wrong. You find yourself sprawled on a frigid cave floor, dressed only in tattered children's nightclothes. Angry welts from birch switches crisscross your exposed skin. Your weapons, armor, and equipment are gone.
+        </div>
+
+        <h3>1.2 Adventure Hook</h3>
+        <div class="note">
+            The adventure begins as the characters awaken in dire circumstances, with no memory of how they arrived...
+        </div>
+    </div>
+
+    <!-- After Section 1 -->
+    <div class="major-section">
+        <h2>2. The Caves of Punishment</h2>
+
+        <h3>2.1 Environment</h3>
+        <div class="note">Use these details progressively to build tension</div>
+
+        <div class="read-aloud">
+            Through the crystalline air, you hear the echoing sobs of children—some distant, some terrifyingly close. Their cries have an odd quality, as if the cave itself is weeping. Each welt from the birch switches pulses with supernatural chill, and your breath forms ice crystals that tinkle musically as they fall. In the distance, the sound of bells - not the cheerful kind - echoes through the caves.
+        </div>
+
+        <div class="key-info">
+            <h4>Sensory Elements</h4>
+            <ul>
+                <li><strong>Sight:</strong> Crystalline formations catch eerie light, shadows move wrong, occasional glimpse of small figures darting away</li>
+                <li><strong>Sound:</strong> 
+                    <ul>
+                        <li>Children's sobs that seem to come from multiple directions</li>
+                        <li>Whispered pleas: "Please... I'll be good..."</li>
+                        <li>Dripping icicles form rhythm with quiet weeping</li>
+                        <li>Distant chains rattling in time with sniffles</li>
+                        <li>Echoing whispers of "I'm sorry" that fade to silence</li>
+                    </ul>
+                </li>
+                <li><strong>Feel:</strong> Bone-deep cold, static charge in air, occasional warm tear falling from above</li>
+                <li><strong>Smell:</strong> Metallic frost, old blood, mineral dust, salt of tears</li>
+            </ul>
+
+            <h4>Atmosphere Shifts</h4>
+            <ul>
+                <li>Temperature drops near bloodstains</li>
+                <li>Shadows lengthen unnaturally</li>
+                <li>Ice crystals form in still air</li>
+                <li>Children's whispers echo distantly</li>
+                <li>Sobs grow louder near ritual markings</li>
+                <li>Crying intensifies as temperature drops</li>
+            </ul>
+
+            <h4>Dynamic Elements</h4>
+            <ul>
+                <li>Icicles crash randomly (1d6 damage)</li>
+                <li>Floor cracks under weight</li>
+                <li>Frost spreads visibly</li>
+                <li>Shadows move against light</li>
+                <li>Ghostly children's figures flicker at edge of vision</li>
+                <li>Weeping seems to follow party's movement</li>
+            </ul>
+
+            <h4>Interactive Elements</h4>
+            <ul>
+                <li>Frozen Chains:
+                    <ul>
+                        <li>Can be broken free (DC 15 Strength)</li>
+                        <li>Used as improvised weapons</li>
+                        <li>Swing across gaps</li>
+                        <li>Rattle in response to children's cries</li>
+                    </ul>
+                </li>
+                <li>Crystal Formations:
+                    <ul>
+                        <li>Amplify light spells</li>
+                        <li>Can be shattered for distractions</li>
+                        <li>Create prismatic effects</li>
+                        <li>Sometimes capture echoes of past victims</li>
+                    </ul>
+                </li>
+                <li>Blood-Stained Ice:
+                    <ul>
+                        <li>Reveals hidden messages when melted</li>
+                        <li>Can be used for blood magic</li>
+                        <li>Tracks Krampus's ritual pattern</li>
+                        <li>Shows visions of captured children when touched</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <h3>2.2 Opening Scene</h3>
+
+        <h4>Initial Conditions</h4>
+        <div class="read-aloud">
+            As your eyes adjust to the dim light, you find yourself in a large cavern roughly 60 feet across, illuminated by an eerie blue-green phosphorescence. The floor is slick with frost, and dark stains mark the center of the chamber. Thirteen stone columns rise from floor to ceiling, each carved with infernal runes. The air bites with an unnatural chill, and somewhere in the darkness, chains rattle ominously.
+        </div>
+
+        <div class="stat-block">
+            <strong>Starting State:</strong>
+            <ul>
+                <li>Characters begin with no equipment except torn children's sleepwear</li>
+                <li>Temperature is 20°F (-6��C); DC 10 Constitution saves every hour or gain exhaustion</li>
+                <li>Each character has 1d4 temporary hit points from numbness</li>
+            </ul>
+        </div>
+
+        <h4>Central Chamber</h4>
+        <div class="key-info">
+            <strong>Notable Features:</strong>
+            <ul>
+                <li>Bloodstains form a ritualistic pattern in the chamber's center</li>
+                <li>Discarded birch switches, stained with blood</li>
+                <li>Frozen chains hanging from the columns</li>
+                <li>Four tunnel exits, one marked with child-sized footprints</li>
+            </ul>
+        </div>
+
+        <div class="stat-block">
+            <strong>Investigation Results:</strong>
+            <ul>
+                <li>DC 12 Arcana: The runes describe punishments for various sins</li>
+                <li>DC 12 Religion: The pattern of bloodstains resembles an inverted sacred circle</li>
+                <li>DC 15 Investigation: Some blood is fresh, some decades old</li>
+                <li>DC 12 Survival: The footprints lead to the southern tunnel</li>
+            </ul>
+        </div>
+
+        <div class="stat-block">
+            <strong>Encounter - The Punished:</strong><br>
+            If the party spends more than 10 minutes in the central chamber, 1d4+1 Shadows emerge from the bloodstains. These are the remnants of children who died here. They attack mindlessly but flee if brought below half health.
+        </div>
+
+        <h3>2.3 Southern Tunnel</h3>
+
+        <h4>Guardian</h4>
+        <div class="read-aloud">
+            The tunnel slopes downward, frost-rimed walls glistening in the dim light. Your breath forms clouds in the frigid air as you descend. Ahead, you spot a heavy iron chain swaying gently, despite the still air. Beyond it lies a chamber where familiar shapes catch your eye—your equipment, piled carelessly against the far wall.
+        </div>
+
+        <div class="stat-block">
+            <strong>Animated Chain</strong> (use Animated Rope stats with these modifications):
+            <ul>
+                <li>Deals cold damage instead of bludgeoning</li>
+                <li>Has resistance to non-magical weapons</li>
+                <li>Can make opportunity attacks</li>
+                <li>AC 14, HP 30</li>
+            </ul>
+        </div>
+
+        <h4>Equipment Chamber</h4>
+        <div class="read-aloud">
+            This roughly circular chamber bears signs of recent activity. Your equipment lies in a jumbled heap, frost beginning to form on metal surfaces. Three items draw your attention: a leather-bound book with torn pages, a child's diary bound in faded red cloth, and distinct tracks in the crystalline frost coating the floor.
+        </div>
+
+        <div class="key-info">
+            <h4>Key Clues</h4>
+            
+            <div class="evidence">
+                <strong>Torn Demonic Tome Page:</strong>
+                <div class="note">
+                    "The page appears to have been violently ripped from a larger volume. Written in infernal script, the text describes an annual ritual:"
+                </div>
+                <ul>
+                    <li>Details Krampus's winter solstice hunt</li>
+                    <li>Mentions vulnerability to silver and holy symbols</li>
+                    <li>Lists signs of his presence: cold spots, twisted decorations, demonic bells</li>
+                </ul>
+            </div>
+
+            <div class="evidence">
+                <strong>Child's Diary:</strong>
+                <div class="note">
+                    "The last entry is tear-stained and hastily written:"
+                </div>
+                <div class="read-aloud">
+                    The diary's pages are stiff with frost, but the last entry is still legible, written in a child's shaky hand: "The bells are getting closer. They sound wrong. Like they're laughing. The shadows are moving by themselves now. Please, someone help us. We were only trying to be kind..."
+                </div>
+                <ul>
+                    <li>Describes being stalked by something with bells</li>
+                    <li>Mentions seeing shadows move wrongly</li>
+                    <li>Notes other children disappearing</li>
+                    <li>Final words: "The bells are getting closer"</li>
+                </ul>
+            </div>
+
+            <div class="evidence">
+                <strong>Tracks in the Frost:</strong>
+                <div class="note">
+                    "Three distinct track patterns are visible in the crystalline frost:"
+                </div>
+                <ul>
+                    <li>Large hoofprints mixed with human footprints (Krampus)</li>
+                    <li>Small barefoot prints (children)</li>
+                    <li>Drag marks from chains</li>
+                </ul>
+            </div>
+
+            <div class="key-info">
+                <h4>Strategic Equipment</h4>
+                <div class="note">Hidden among the party's gear are several items that could prove crucial:</div>
+                
+                <strong>Defensive Items:</strong>
+                <ul>
+                    <li>Silver-Threaded Rope (3)
+                        <ul>
+                            <li>Can be used to create wards</li>
+                            <li>Blocks shadow movement</li>
+                            <li>Advantage on grapple checks vs Krampus</li>
+                        </ul>
+                    </li>
+                    <li>Blessed Bell of Dawn
+                        <ul>
+                            <li>Disrupts dimension door attempt</li>
+                            <li>Causes shadows to flee (DC 15 Wisdom save)</li>
+                            <li>Once per day: Create daylight in 20ft radius</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="note">
+                    <strong>Equipment Synergies:</strong>
+                    <ul>
+                        <li>Silver-Threaded Rope + Holy Symbol: Creates temporary ward (10ft radius, 1d4 rounds)</li>
+                        <li>Bell of Dawn + Frost-Etched Mirror: Amplifies radiant damage (+1d6)</li>
+                        <li>Music Box + Sanctified Salt: Creates safe zone for children (15ft radius)</li>
+                        <li>Iron Birch Switch + Silver Weapons: Extra damage on coordinated attacks (+1d4)</li>
+                        <li>Multiple Holy Symbols: Each additional symbol adds +2 to ward saves</li>
+                    </ul>
+                </div>
+
+                <strong>Offensive Items:</strong>
+                <ul>
+                    <li>Vial of Sanctified Salt (2)
+                        <ul>
+                            <li>Creates 10ft barrier impassable to Krampus</li>
+                            <li>Can be thrown: 2d8 radiant damage</li>
+                            <li>Melts black ice instantly</li>
+                        </ul>
+                    </li>
+                    <li>Iron Birch Switch
+                        <ul>
+                            <li>+1 weapon, counts as silver</li>
+                            <li>Critical hits dispel magical effects</li>
+                            <li>Can parry chain attacks (reaction)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <strong>Utility Items:</strong>
+                <ul>
+                    <li>Child's Music Box
+                        <ul>
+                            <li>Calms captured children</li>
+                            <li>Reveals invisible creatures in 30ft</li>
+                            <li>Can counter Krampus's fear effect</li>
+                        </ul>
+                    </li>
+                    <li>Frost-Etched Mirror
+                        <ul>
+                            <li>Shows true reflections of shapeshifters</li>
+                            <li>Can trap shadows temporarily</li>
+                            <li>Reflects cold damage back to source</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="stat-block">
+            <strong>Investigation DCs:</strong>
+            <table>
+                <tr>
+                    <th>Check</th>
+                    <th>DC</th>
+                    <th>Information</th>
+                </tr>
+                <tr>
+                    <td>Religion</td>
+                    <td>12</td>
+                    <td>Identify infernal text's ritual significance</td>
+                </tr>
+                <tr>
+                    <td>Investigation</td>
+                    <td>15</td>
+                    <td>Date diary entry to previous winter solstice</td>
+                </tr>
+                <tr>
+                    <td>Survival</td>
+                    <td>12</td>
+                    <td>Track marks lead toward Lord Klaus's keep</td>
+                </tr>
+                <tr>
+                    <td>Arcana</td>
+                    <td>15</td>
+                    <td>Sense residual demonic energy</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="key-info">
+            <h4>Developments</h4>
+            <ul>
+                <li class="important">Chain attacks if party lingers too long examining clues</li>
+                <li>Frost begins to creep over any equipment left untouched</li>
+                <li>Distant sound of bells grows louder if party delays</li>
+                <li>Temperature drops noticeably every few minutes</li>
+            </ul>
+        </div>
+
+        <h3>2.4 Pacing</h3>
+
+        <div class="key-info">
+            <h4>Atmosphere</h4>
+            <ul>
+                <li>Distant sounds of children crying</li>
+                <li>Chains rattling in unfelt wind</li>
+                <li>Temperature drops near the bloodstains</li>
+                <li>Whispered confessions echo through tunnels</li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>Development</h4>
+            <p>The party should:</p>
+            <ol>
+                <li>Recover their equipment from the southern tunnel</li>
+                <li>Learn about Krampus through environmental clues</li>
+                <li>Follow the fresh tracks leading toward Lord Klaus's keep</li>
+            </ol>
+        </div>
+
+        <div class="key-info">
+            <h4>Timing</h4>
+            <p>This section should take <strong>30-45 minutes</strong> maximum, maintaining urgency while allowing for investigation.</p>
+            <div class="note">
+                If the party lingers too long, increase the frequency of Shadow encounters.
+            </div>
+        </div>
+
+        <h3>2.5 Transition to Keep</h3>
+        
+        <div class="read-aloud">
+            Following the tracks through the bitter cold, you emerge from the caves onto a snow-covered hillside. Above you looms a dark stone keep, its windows flickering with an eerie blue light. Holiday decorations that should bring cheer now seem twisted and wrong, casting unsettling shadows in the moonlight. The tracks lead directly to the keep's main entrance, where massive doors hang broken from their hinges.
+        </div>
+
+        <div class="key-info">
+            <h4>Progress Check</h4>
+            <div class="note">Before proceeding, ensure players have:</div>
+            <ul>
+                <li>Recovered their equipment</li>
+                <li>Found at least one silver weapon</li>
+                <li>Learned about Krampus's vulnerabilities</li>
+                <li>Gained some strategic items</li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>Environmental Shift</h4>
+            <ul>
+                <li>Temperature drops sharply (-10°F)</li>
+                <li>Wind carries sounds of struggle</li>
+                <li>Holiday decorations animate briefly</li>
+                <li>Shadows dance unnaturally</li>
+                <li>Snow falls upward near keep</li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>Approach Options</h4>
+            <table>
+                <tr>
+                    <th>Route</th>
+                    <th>Advantage</th>
+                    <th>Risk</th>
+                </tr>
+                <tr>
+                    <td>Main Path</td>
+                    <td>Direct route, clear tracks</td>
+                    <td>Exposed to view</td>
+                </tr>
+                <tr>
+                    <td>Service Entrance</td>
+                    <td>Better cover</td>
+                    <td>Shadow patrols</td>
+                </tr>
+                <tr>
+                    <td>Climbing Wall</td>
+                    <td>Surprise entry</td>
+                    <td>DC 15 Athletics</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="key-info">
+            <h4>Tactical Considerations</h4>
+            <ul>
+                <li>Keep entrance is 200 feet from cave exit</li>
+                <li>Open ground provides no cover</li>
+                <li>Snow drifts can be used for stealth</li>
+                <li>Decorations provide partial cover</li>
+                <li>Shadows avoid bright light</li>
+            </ul>
+        </div>
+
+        <div class="stat-block">
+            <strong>Random Encounters (Roll 1d6):</strong>
+            <table>
+                <tr>
+                    <th>Roll</th>
+                    <th>Encounter</th>
+                </tr>
+                <tr>
+                    <td>1-2</td>
+                    <td>1d4 Shadows patrol area</td>
+                </tr>
+                <tr>
+                    <td>3-4</td>
+                    <td>Animated decorations attack</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Blizzard reduces visibility</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Child fleeing from keep</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="key-info">
+            <h4>DM Guidance</h4>
+            <strong>Key Moments:</strong>
+            <ul>
+                <li>Allow players to plan approach</li>
+                <li>Emphasize growing corruption</li>
+                <li>Build tension with environment</li>
+                <li>Provide clear signs of urgency</li>
+            </ul>
+
+            <strong>Transition Prompts:</strong>
+            <ul>
+                <li>"How do you approach the keep?"</li>
+                <li>"What precautions do you take?"</li>
+                <li>"Who takes point entering?"</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- After Section 2 -->
+    <div class="major-section">
+        <h2>3. Lord Klaus's Keep</h2>
+
+        <h3>3.1 Environment</h3>
+        <div class="note">Use these details to enhance the corrupted holiday atmosphere</div>
+
+        <div class="key-info">
+            <h4>Sensory Elements</h4>
+            <ul>
+                <li><strong>Sight:</strong> Holiday decorations twisted dark, evergreen garlands withered black</li>
+                <li><strong>Sound:</strong> Demonic carols, creaking ice, children's cries</li>
+                <li><strong>Feel:</strong> Unnatural cold spots, static electricity</li>
+                <li><strong>Smell:</strong> Burning evergreen, sulfur, old parchment</li>
+            </ul>
+
+            <h4>Atmosphere Shifts</h4>
+            <ul>
+                <li>Candlelight flickers blue</li>
+                <li>Frost creeps up walls</li>
+                <li>Windows frost over suddenly</li>
+                <li>Decorations animate briefly</li>
+            </ul>
+
+            <h4>Dynamic Elements</h4>
+            <ul>
+                <li>Toys skitter across floor</li>
+                <li>Presents unwrap themselves</li>
+                <li>Wreaths twist into thorns</li>
+                <li>Stockings drip red</li>
+            </ul>
+
+            <h4>Interactive Elements</h4>
+            <ul>
+                <li>Holiday Decorations:
+                    <ul>
+                        <li>Garlands can entangle enemies</li>
+                        <li>Ornaments as thrown weapons</li>
+                        <li>Wreaths as temporary portals</li>
+                    </ul>
+                </li>
+                <li>Magical Workshop:
+                    <ul>
+                        <li>Toys can be animated as allies</li>
+                        <li>Gift wrap as emergency bandages</li>
+                        <li>Workbench as crafting station</li>
+                    </ul>
+                </li>
+                <li>Enchanted Windows:
+                    <ul>
+                        <li>Show visions of children in danger</li>
+                        <li>Can be used as emergency exits</li>
+                        <li>Reflect harmful magic</li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+        <h3>3.2 Overview</h3>
+
+        <div class="key-info">
+            <h4>Layout</h4>
+            <p>A black stone keep sits atop a forested hill, normally a beacon of winter cheer now twisted by Krampus's influence. The keep consists of three main areas:</p>
+            <ul>
+                <li>The entrance foyer</li>
+                <li>Two wings on the ground floor</li>
+                <li>The bedchambers above</li>
+            </ul>
+        </div>
+
+        <div class="read-aloud">
+            <strong>When party discovers Krampus has fled to town:</strong><br>
+            Screams echo from the town below as shadows dance across snowy streets. The usually cheerful town square has become a maze of dark alleys and frozen shadows.
+        </div>
+
+        <div class="note">
+            <strong>Player Trigger:</strong> Ask how they plan to track Krampus through the streets.
+        </div>
+
+        <h3>3.3 Ground Floor</h3>
+
+        <h4>The Foyer</h4>
+        <div class="read-aloud">
+            The twisted remains of massive double doors hang from their hinges. Inside, carved stone dragons line the walls, and a large beholder's visage dominates the ceiling, its central eye following your movement. Three iron doors lead deeper into the keep - one to the west, one to the east, and one straight ahead. Seven unlit candelabras are spaced evenly around the room.
+        </div>
+
+        <div class="note">
+            <strong>Dramatic Moment:</strong> When the party solves the candle puzzle, Klaus's magic activates - the beholder carving winks at them and holiday music begins playing from nowhere, but twisted and discordant.
+        </div>
+
+        <div class="key-info">
+            <strong>Features:</strong>
+            <ul>
+                <li>Beholder Carvings: Animate eye that tracks movement</li>
+                <li>Dragon Carvings: Conceal flame trap</li>
+                <li>Iron Doors: West (Laboratory), East (Library), Forward (Stairs)</li>
+                <li>Broken Doors: Show signs of tremendous force</li>
+            </ul>
+        </div>
+
+        <div class="stat-block">
+            <strong>Trap - Dragon's Breath:</strong>
+            <ul>
+                <li>Triggers when party fully enters room</li>
+                <li>Beholder eye closes, dragon mouths spew fire</li>
+                <li>Blocks all exits with floor-to-ceiling flames</li>
+                <li>1d8 fire damage on contact</li>
+                <li>Additional 1d8 each round in flames</li>
+                <li>Requires DC 15 Investigation to spot beforehand</li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <strong>Puzzle - The Seven Flames:</strong>
+            <ul>
+                <li>Must light all seven candelabras</li>
+                <li>Riddle appears in floor: "I am tall when young, short when old. What am I?"</li>
+                <li>Answer: A candle</li>
+                <li>Can use wall flames to light candles</li>
+                <li>Success: Beholder eye opens, flames extinguish</li>
+            </ul>
+        </div>
+
+        <h4>The Laboratory (West Wing)</h4>
+        <div class="read-aloud">
+            Glass vials and arcane apparatus cover long tables. A wounded creature floats in the center - a Spectator with a single large eye, now injured and leaking otherworldly ichor. A narrow staircase in the back leads upward.
+        </div>
+
+        <div class="note">
+            <strong>Comic Relief:</strong> Ceall floats upside down while processing information, muttering about "quarterly toy production quotas" and "elf union regulations."
+        </div>
+
+        <div class="key-info">
+            <strong>Features:</strong>
+            <ul>
+                <li>Apparatus: Various magical experiments</li>
+                <li>Back Stairs: Leads to bedchambers</li>
+                <li>Ceall the Spectator: Injured ally</li>
+                <li>Supply Cabinets: Contain magic items</li>
+            </ul>
+        </div>
+
+        <div class="stat-block">
+            <strong>NPC - Ceall the Spectator:</strong>
+            <ul>
+                <li>Current HP: 20 (half health)</li>
+                <li>Friendly if party identifies themselves</li>
+                <li>Can explain:
+                    <ul>
+                        <li>Krampus attacked without warning</li>
+                        <li>Cursed Klaus into magical sleep</li>
+                        <li>Will steal Klaus's soul by dawn</li>
+                        <li>Must be stopped before then</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <strong>Treasure:</strong>
+            Roll 1d4+2 for number of items:
+            <ol>
+                <li>Potion of Healing</li>
+                <li>Ring of Warmth</li>
+                <li>Boots of Striding and Springing</li>
+                <li>Lantern of Revealing</li>
+                <li>Brooch of Shielding</li>
+                <li>Cloak of Protection</li>
+            </ol>
+
+            <strong>Hidden Cache (DC 15 Investigation):</strong>
+            <ul>
+                <li>Silver-Plated Shortsword (+1, counts as silver)</li>
+                <li>Quiver of Silver-Tipped Arrows (20)</li>
+                <li>Silver Holy Symbol</li>
+                <li>Note: "For emergencies - K."</li>
+            </ul>
+        </div>
+
+        <h4>The Library (East Wing)</h4>
+        <div class="read-aloud">
+            Towering bookshelves line the walls of this circular chamber. A section on demonology shows signs of recent disturbance. The air is thick with the smell of old leather and parchment, now tainted with a sulfurous odor.
+        </div>
+
+        <div class="key-info">
+            <strong>Features:</strong>
+            <ul>
+                <li>Demon Section: DC 10 Investigation to find</li>
+                <li>Research Materials: Information about Krampus</li>
+                <li>Reading Tables: Signs of struggle</li>
+                <li>Magical Lights: Cast shadows of recent events</li>
+            </ul>
+        </div>
+
+        <div class="stat-block">
+            <strong>Krampus Lore:</strong>
+            <div class="note">(DC 10 Investigation)</div>
+            <ul>
+                <li>Demon from the Abyss</li>
+                <li>Steals souls of the wicked</li>
+                <li>Particularly targets children</li>
+                <li>Can be forced to release souls if defeated</li>
+                <li>Vulnerable to silver weapons</li>
+            </ul>
+        </div>
+
+        <div class="stat-block">
+            <strong>Optional Encounter:</strong>
+            <ul>
+                <li>2 Shadows lurk in library</li>
+                <li>Attack if party spends too long researching</li>
+                <li>Can be avoided with successful DC 15 Stealth</li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <strong>Armory Display (DC 13 Investigation):</strong>
+            <ul>
+                <li>Ceremonial Silver Dagger (+1, advantage vs demons)</li>
+                <li>Silver-Chased Mace (+1, extra 1d6 radiant to fiends)</li>
+                <li>Silvered Chain Shirt (AC 13 + Dex)</li>
+                <li>Note: "Annual winter solstice protection gear"</li>
+            </ul>
+        </div>
+
+        <h3>3.4 Upper Floor</h3>
+
+        <h4>The Bedchambers</h4>
+        <div class="read-aloud">
+            Rich crimson tapestries adorn the walls of this opulent chamber. A massive four-poster bed with red velvet curtains dominates the center, sized for someone of particularly jolly proportions. Through frosted windows, you see the lights of the town below and what appears to be a rooftop landing platform covered in strange marks. Before the bed stands an iron golem, its surface decorated with holiday motifs and what looks suspiciously like reindeer patterns.
+        </div>
+
+        <div class="note">
+            <strong>Oh Shit Moment:</strong> Klaus's beard suddenly glows with radiant energy as Krampus approaches, and all the toys in the room animate to defend their creator. Grit starts stress-baking cookies that grant magical buffs to the party.
+        </div>
+
+        <div class="key-info">
+            <strong>Features:</strong>
+            <ul>
+                <li>Four-Poster Bed: Klaus lies within, his white beard frosted with ice</li>
+                <li>Iron Golem (Grit): Guards Klaus, wears a tiny red hat</li>
+                <li>Windows: View of town and curious rooftop landing</li>
+                <li>Magical Clock: Shows time until dawn (shaped like a cookie)</li>
+                <li>Workshop Table: Covered in lists of names, marked "Naughty" and "Nice"</li>
+                <li>Wardrobe: Contains numerous red outfits trimmed with white fur</li>
+            </ul>
+        </div>
+
+        <div class="stat-block">
+            <strong>NPC - Grit the Iron Golem:</strong>
+            <ul>
+                <li>Loyal to Klaus ("The Boss")</li>
+                <li>Will attack unless party convinces it they're "on the nice list"</li>
+                <li>DC 15 Persuasion to gain cooperation</li>
+                <li>Can confirm Krampus's escape into town</li>
+                <li>Occasionally mutters about "toy production quotas"</li>
+            </ul>
+        </div>
+
+        <div class="stat-block">
+            <strong>Lord Klaus's Condition:</strong>
+            <ul>
+                <li>Magical slumber, occasionally muttering "ho ho... ho..."</li>
+                <li>Growing weaker each minute</li>
+                <li>Only Krampus or 9th-level spell can wake him</li>
+                <li>Will die at dawn if not saved</li>
+                <li>Clutches a half-eaten cookie in one hand</li>
+                <li>Smells faintly of peppermint and woodshavings</li>
+            </ul>
+        </div>
+
+        <h3>3.5 Keep Management</h3>
+
+        <div class="key-info">
+            <h4>Time Tracking</h4>
+            <ul>
+                <li>Party entered keep 8 hours before dawn</li>
+                <li>Each major area investigation takes 30 minutes</li>
+                <li>Combat encounters take 15 minutes</li>
+                <li>Research takes 30 minutes</li>
+                <li>Track time until dawn</li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>Tactical Notes</h4>
+            <ol>
+                <li><strong>Foyer</strong>
+                    <ul>
+                        <li>Multiple pillars for cover</li>
+                        <li>Flame trap can be used tactically</li>
+                        <li>Three escape routes</li>
+                    </ul>
+                </li>
+                <li><strong>Laboratory</strong>
+                    <ul>
+                        <li>Volatile chemicals can explode</li>
+                        <li>Tables provide half cover</li>
+                        <li>Back stairs offer tactical retreat</li>
+                    </ul>
+                </li>
+                <li><strong>Library</strong>
+                    <ul>
+                        <li>Bookshelves as cover</li>
+                        <li>Tight spaces between shelves</li>
+                        <li>Good for ambush setup</li>
+                    </ul>
+                </li>
+                <li><strong>Bedchambers</strong>
+                    <ul>
+                        <li>Open space for golem combat</li>
+                        <li>Bed as partial cover</li>
+                        <li>Windows as escape route</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="key-info">
+            <h4>Developments</h4>
+            <ul>
+                <li>Krampus's location can be determined from windows</li>
+                <li>Children's screams can be heard from town</li>
+                <li>Each delay brings Klaus closer to death</li>
+                <li>Weather worsens as night progresses</li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>Difficulty Adjustments</h4>
+            <strong>Easier:</strong>
+            <ul>
+                <li>Reduce flame trap damage</li>
+                <li>Golem recognizes party immediately</li>
+                <li>More healing potions available</li>
+                <li>Shadows don't appear in library</li>
+            </ul>
+
+            <strong>Harder:</strong>
+            <ul>
+                <li>Increase flame trap damage</li>
+                <li>Additional shadows in library</li>
+                <li>Golem always hostile</li>
+                <li>Shorter time until dawn</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="major-section">
+        <h3>3.6 Transition to Town</h3>
+        
+        <div class="read-aloud">
+            <strong>From Upper Windows:</strong><br>
+            Through the frost-rimmed windows, you see dark shapes moving through the town below. Holiday lights flicker and die as something massive passes beneath them. The sound of children's screams carries on the bitter wind, and you can make out a figure dragging chains through the snow-covered streets.
+        </div>
+
+        <div class="key-info">
+            <h4>Tracking Preparation</h4>
+            <p>Before the party leaves the keep, prompt them to:</p>
+            <ul>
+                <li>Gather any useful items from the laboratory</li>
+                <li>Check Klaus's condition one last time</li>
+                <li>Get final information from Ceall or Grit</li>
+                <li>Plan their approach to town</li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>Environmental Shift</h4>
+            <strong>Signs of Krampus's Passage:</strong>
+            <ul>
+                <li>Holiday decorations twist and blacken</li>
+                <li>Temperature drops dramatically</li>
+                <li>Snow falls in unnatural patterns</li>
+                <li>Shadows move against the light</li>
+                <li>Children's toys animate briefly</li>
+                <li>Bells ring discordantly</li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>Path to Town</h4>
+            <strong>Player Options:</strong>
+            <ul>
+                <li>Direct Route:
+                    <ul>
+                        <li>Fastest but most exposed</li>
+                        <li>Clear view of Krampus's trail</li>
+                        <li>Risk of shadow ambush</li>
+                    </ul>
+                </li>
+                <li>Rooftop Route:
+                    <ul>
+                        <li>Slower but stealthier</li>
+                        <li>Better vantage points</li>
+                        <li>DC 13 Acrobatics checks</li>
+                    </ul>
+                </li>
+                <li>Back Alleys:
+                    <ul>
+                        <li>Moderate pace, good cover</li>
+                        <li>May find trapped children</li>
+                        <li>Risk getting lost (DC 12 Survival)</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>DM Guidance</h4>
+            <strong>Key Moments to Emphasize:</strong>
+            <ul>
+                <li>Time pressure as dawn approaches</li>
+                <li>Growing corruption of holiday elements</li>
+                <li>Sounds of distress from townspeople</li>
+                <li>Opportunities to gather tracking information</li>
+            </ul>
+
+            <strong>Player Prompts:</strong>
+            <ul>
+                <li>"How do you prepare for the pursuit?"</li>
+                <li>"Which route through town seems best?"</li>
+                <li>"What signs of Krampus do you look for?"</li>
+                <li>"How do you stay coordinated as a group?"</li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>Transition Events (Roll 1d4)</h4>
+            <table>
+                <tr>
+                    <th>Roll</th>
+                    <th>Event</th>
+                    <th>Impact</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Find hiding child</td>
+                    <td>Provides shortcut to town square</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Shadow patrol</td>
+                    <td>Stealth check or combat</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Magical disturbance</td>
+                    <td>Arcana check reveals Krampus's direction</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Environmental hazard</td>
+                    <td>Acrobatics check or take 1d6 cold damage</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- After Section 3 -->
+    <div class="major-section">
+        <h2>4. Final Confrontation</h2>
+
+        <h3>4.1 Environment</h3>
+        <div class="note">Use these details to create a sense of mounting dread</div>
+
+        <div class="key-info">
+            <h4>Sensory Elements</h4>
+            <ul>
+                <li><strong>Sight:</strong> Holiday lights cast eerie shadows, black ice glints</li>
+                <li><strong>Sound:</strong> Muffled screams, wrong bells, howling wind</li>
+                <li><strong>Feel:</strong> Biting wind, ground shifting, air pressure drops</li>
+                <li><strong>Smell:</strong> Chimney smoke, ozone, frozen fear</li>
+            </ul>
+
+            <h4>Atmosphere Shifts</h4>
+            <ul>
+                <li>Wind howls through streets</li>
+                <li>Snow turns to black ice</li>
+                <li>Shadows stretch toward party</li>
+                <li>Temperature plummets suddenly</li>
+            </ul>
+
+            <h4>Dynamic Elements</h4>
+            <ul>
+                <li>Buildings creak with cold</li>
+                <li>Ice forms in patterns</li>
+                <li>Snow drifts shift</li>
+                <li>Shadows dance independently</li>
+            </ul>
+
+            <h4>Interactive Elements</h4>
+            <ul>
+                <li>Town Square Features:
+                    <ul>
+                        <li>Holiday lights can be weaponized</li>
+                        <li>Snow piles for surprise attacks</li>
+                        <li>Market stalls for improvised traps</li>
+                    </ul>
+                </li>
+                <li>Weather Control:
+                    <ul>
+                        <li>Direct snow for battlefield control</li>
+                        <li>Create ice walls for cover</li>
+                        <li>Use wind for movement advantage</li>
+                    </ul>
+                </li>
+                <li>Civilian Elements:
+                    <ul>
+                        <li>Townsfolk provide distractions</li>
+                        <li>Children can be organized to help</li>
+                        <li>Local shops offer emergency supplies</li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+        <h3>4.2 Battle Setup</h3>
+
+        <div class="read-aloud">
+            <strong>Successful Tracking:</strong><br>
+            The snow-laden plaza lies before you, illuminated by flickering streetlamps. Through the falling snow, you see a towering figure with one human foot and one cloven hoof. Krampus stands near the center, chains rattling as he attempts to stuff another struggling victim into his magical sack. The demon hasn't noticed you yet.
+        </div>
+
+        <div class="read-aloud">
+            <strong>Failed Tracking:</strong><br>
+            A bone-chilling laugh echoes across the snow-covered plaza as Krampus and his shadowy servants await your arrival. The demon's chains rattle ominously, and his magical sack writhes with the movement of those trapped within. "Naughty children," he growls, "coming to interrupt my work."
+        </div>
+
+        <div class="note">
+            <strong>Dramatic Moment:</strong> The town's holiday decorations suddenly animate into a twisted parade, with Krampus conducting their movement using his chains like a maestro's baton.
+        </div>
+
+        <div class="key-info">
+            <h4>Tracking Mechanics</h4>
+            <p>Allow players to make 4 different skill checks from this list:</p>
+            <table>
+                <tr>
+                    <th>Skill</th>
+                    <th>DC</th>
+                    <th>Information on Success</th>
+                </tr>
+                <tr>
+                    <td>Survival</td>
+                    <td>13</td>
+                    <td>Follow physical tracks in snow</td>
+                </tr>
+                <tr>
+                    <td>Perception</td>
+                    <td>13</td>
+                    <td>Spot signs of passage (broken decorations, frost patterns)</td>
+                </tr>
+                <tr>
+                    <td>Investigation</td>
+                    <td>13</td>
+                    <td>Deduce likely path from evidence</td>
+                </tr>
+                <tr>
+                    <td>Religion</td>
+                    <td>13</td>
+                    <td>Predict movement based on ritual patterns</td>
+                </tr>
+                <tr>
+                    <td>Nature</td>
+                    <td>13</td>
+                    <td>Read environmental disturbances</td>
+                </tr>
+            </table>
+
+            <div class="note">
+                <strong>Oh Shit Moment:</strong> On a natural 20 tracking check, the party discovers their own childhood footprints in the frost from years ago when Krampus first marked them.
+            </div>
+
+            <strong>Success Tracking:</strong>
+            <ul>
+                <li>Each success provides tactical advantage in final battle</li>
+                <li>Players can work together using Help action</li>
+                <li>Failed checks waste 10 minutes of in-game time</li>
+                <li>Allow creative skill use if players justify it</li>
+            </ul>
+
+            <div class="note">
+                <strong>Comic Relief:</strong> During tracking, the party finds a shadow trying to stuff itself into a child's jack-in-the-box to hide, getting comically stuck.
+            </div>
+        </div>
+
+        <div class="key-info">
+            <h4>Battlefield Layout</h4>
+            <ul>
+                <li>60ft × 60ft snow-covered plaza</li>
+                <li>Entire area is difficult terrain (half movement)</li>
+                <li>Four entry points (north, south, east, west)</li>
+                <li>Features:
+                    <ul>
+                        <li>3 streetlamps providing bright light in 20ft radius</li>
+                        <li>2 market stalls providing 3/4 cover</li>
+                        <li>Central statue providing full cover</li>
+                        <li>Scattered benches providing half cover</li>
+                        <li>Frozen fountain</li>
+                        <li>Snow drifts (5ft high, require DC 13 Athletics to climb)</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>Starting Positions</h4>
+            <p>Based on tracking success:</p>
+
+            <strong>Success (DC 13 on 4+ skill checks)</strong>
+            <ul>
+                <li>Party can position anywhere within 30ft</li>
+                <li>Get surprise round</li>
+                <li>Krampus starts in center</li>
+                <li>No Shadows present</li>
+            </ul>
+
+            <strong>Partial Success (DC 13 on 2-3 checks)</strong>
+            <ul>
+                <li>Party enters from preferred side</li>
+                <li>Normal initiative</li>
+                <li>Krampus ready for combat</li>
+                <li>Two Shadows join Round 2</li>
+            </ul>
+
+            <strong>Failure (DC 13 on 0-1 checks)</strong>
+            <ul>
+                <li>Party forced to enter from north</li>
+                <li>Krampus and Shadows get surprise</li>
+                <li>Enemies positioned optimally</li>
+                <li>Three Shadows present</li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>The Stakes</h4>
+            <strong>Time Pressure:</strong>
+            <ul>
+                <li>Children in bag have 10 rounds of air</li>
+                <li>Dawn approaches (30 rounds until Klaus dies)</li>
+                <li>Each round in bag does 1d6 psychic damage to children</li>
+            </ul>
+
+            <div class="note">
+                <strong>Oh Shit Moment:</strong> When examining the Naughty List during combat, players discover their "bad" deeds were actually acts of sacrifice and kindness, revealing Krampus's corruption of true goodness.
+            </div>
+
+            <strong>Hostage Elements:</strong>
+            <ul>
+                <li>Holly (Half-elf girl)
+                    <ul>
+                        <li>HP: 4</li>
+                        <li>Currently unconscious</li>
+                    </ul>
+                </li>
+                <li>Tean (Halfling boy)
+                    <ul>
+                        <li>HP: 3</li>
+                        <li>Currently unconscious</li>
+                    </ul>
+                </li>
+                <li>Bag can be targeted (AC 15, 30 HP)</li>
+                <li>Destroying bag frees captives</li>
+            </ul>
+
+            <div class="note">
+                <strong>Comic Relief:</strong> When the bag is damaged, it hiccups and accidentally releases a very confused penguin that waddles around the battlefield giving tactical advice in a posh accent.
+            </div>
+        </div>
+
+        <h3>4.3 Combat Details</h3>
+
+        <div class="stat-block">
+            <h4>Krampus (CR 15)</h4>
+            <ul>
+                <li>AC: 18</li>
+                <li>HP: 212</li>
+                <li>Speed: 40ft</li>
+                <li>Saving Throws: Str +10, Con +9, Wis +7</li>
+                <li>Damage Resistances: Cold, fire; nonmagical weapons</li>
+                <li>Damage Vulnerabilities: Radiant, silver weapons</li>
+                <li>Condition Immunities: Charmed, frightened, exhaustion</li>
+                <li>Senses: Darkvision 120ft, passive Perception 19</li>
+                <li>Languages: Infernal, Common</li>
+                <li>Special Traits:
+                    <ul>
+                        <li>Magic Resistance: Advantage on saves vs. spells</li>
+                        <li>Shadow Step: Bonus action teleport 60ft between shadows</li>
+                        <li>Freezing Aura: 10ft radius, DC 15 Con or 2d6 cold damage</li>
+                        <li>Children's Bane: Advantage on attacks vs. creatures under age 16</li>
+                    </ul>
+                </li>
+                <li>Key Abilities:
+                    <ul>
+                        <li>Multiattack: Chain and Claws</li>
+                        <li>Hooked Chain: +10, 15ft reach, 6d6+5 piercing + grapple</li>
+                        <li>Claws: +10, 5ft reach, 4d6+5 slashing + grapple</li>
+                        <li>Frightful Presence: DC 16 Wisdom save or frightened</li>
+                    </ul>
+                </li>
+                <li>Legendary Actions (3):
+                    <ul>
+                        <li>Gore: 2d4+5 piercing (+2d6 vs grappled)</li>
+                        <li>Heat Metal: 3d8 fire damage</li>
+                        <li>Waylay: Throw grappled creature into bag</li>
+                        <li>Shadow Call: Summon 1d4 Shadows</li>
+                        <li>Ice Wall: Create 15ft wall of black ice (30 HP)</li>
+                    </ul>
+                </li>
+                <li>Lair Actions (Initiative 20):
+                    <ul>
+                        <li>Freeze Ground: Area becomes difficult terrain</li>
+                        <li>Animate Decorations: 2d4 flying objects attack</li>
+                        <li>Extinguish Lights: 30ft radius darkness</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="stat-block">
+            <h4>Shadows</h4>
+            <ul>
+                <li>AC: 12</li>
+                <li>HP: 16 each</li>
+                <li>Speed: 40ft, fly 40ft</li>
+                <li>Damage Immunities: Necrotic, poison</li>
+                <li>Damage Vulnerabilities: Radiant</li>
+                <li>Condition Immunities: Exhaustion, frightened, grappled, paralyzed, petrified, poisoned, prone, restrained</li>
+                <li>Special Traits:
+                    <ul>
+                        <li>Amorphous: Move through 1-inch space</li>
+                        <li>Shadow Stealth: Hide bonus action in dim light</li>
+                        <li>Sunlight Weakness: Disadvantage in bright light</li>
+                    </ul>
+                </li>
+                <li>Actions:
+                    <ul>
+                        <li>Strength Drain: +4 to hit, 2d6+2 necrotic damage</li>
+                        <li>Reduces target's Strength by 1d4</li>
+                        <li>Target dies at 0 Strength, becomes new Shadow</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>Combat Phases</h4>
+            <strong>Phase 1 (Full HP to 150):</strong>
+            <ul>
+                <li>Aggressive positioning</li>
+                <li>Uses chain attacks to isolate targets</li>
+                <li>Summons Shadows strategically</li>
+            </ul>
+            <div class="note">
+                <strong>Comic Relief:</strong> One of the summoned shadows has a squeaky voice and keeps apologizing for attacking: "Sorry! Company policy! Nothing personal!"
+            </div>
+
+            <strong>Phase 2 (149 to 75):</strong>
+            <ul>
+                <li>More defensive positioning</li>
+                <li>Focuses on protecting the bag</li>
+                <li>Uses environment for cover</li>
+            </ul>
+            <div class="note">
+                <strong>Oh Shit Moment:</strong> Krampus uses a child as a human shield, but the child recognizes one of the party members: "I remember you! You were on the nice list!"
+            </div>
+
+            <strong>Phase 3 (74 to 0):</strong>
+            <ul>
+                <li>Desperate tactics</li>
+                <li>Attempts to flee with captives</li>
+                <li>Uses all legendary actions</li>
+            </ul>
+            <div class="note">
+                <strong>Comic Relief:</strong> Krampus slips on his own black ice when bloodied, and his chain gets tangled in holiday lights.
+            </div>
+        </div>
+
+        <div class="key-info">
+            <h4>Advanced Tactics</h4>
+            <strong>Chain Combinations:</strong>
+            <ul>
+                <li>Grapple + Gore: Extra damage to restrained targets</li>
+                <li>Chain Pull + Shadow Attack: Force movement through Shadows</li>
+                <li>Multiple Grapples: Control multiple targets</li>
+                <li>Chain + Environmental Hazard: Force movement into hazards</li>
+            </ul>
+
+            <strong>Shadow Tactics:</strong>
+            <ul>
+                <li>Flanking Positions: Advantage on attacks</li>
+                <li>Focus Fire: Multiple Shadows on one target</li>
+                <li>Retreat Through Walls: Tactical repositioning</li>
+                <li>Guard Escape Routes: Block player movement</li>
+            </ul>
+
+            <strong>Environmental Usage:</strong>
+            <ul>
+                <li>Create choke points with ice walls</li>
+                <li>Use darkness to empower Shadows</li>
+                <li>Knock over market stalls for difficult terrain</li>
+                <li>Use height advantage from lamp posts</li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>Environmental Usage:</h4>
+            <ul>
+                <li>Create choke points with ice walls</li>
+                <li>Use darkness to empower Shadows</li>
+                <li>Knock over market stalls for difficult terrain</li>
+                <li>Use height advantage from lamp posts</li>
+            </ul>
+
+            <div class="note">
+                <strong>Oh Shit Moment:</strong> The frozen fountain suddenly erupts with liquid shadow, creating a swirling vortex that players must navigate around or risk being pulled into the Shadowfell.
+            </div>
+        </div>
+
+        <div class="key-info">
+            <h4>Counter-Tactics for Players</h4>
+            <strong>Against Krampus:</strong>
+            <ul>
+                <li>Target the bag instead of Krampus</li>
+                <li>Use radiant damage to prevent shadow step</li>
+                <li>Break line of sight to avoid chain attacks</li>
+                <li>Ready actions to interrupt legendary actions</li>
+            </ul>
+
+            <div class="note">
+                <strong>Dramatic Moment:</strong> When a player lands a critical hit with a silver weapon, Krampus's form briefly flickers to reveal his original appearance as Klaus's partner in judging good and evil.
+            </div>
+
+            <strong>Against Shadows:</strong>
+            <ul>
+                <li>Create areas of bright light</li>
+                <li>Use area effect spells</li>
+                <li>Protect weakened allies</li>
+                <li>Block retreat paths</li>
+            </ul>
+
+            <div class="note">
+                <strong>Comic Relief:</strong> One shadow becomes terrified of a player's stuffed animal trophy, fleeing in panic whenever it's brandished.
+            </div>
+
+            <strong>Environmental Advantages:</strong>
+            <ul>
+                <li>Use market stalls for full cover</li>
+                <li>Create light zones with lanterns</li>
+                <li>Salt lines to block movement</li>
+                <li>High ground on snow drifts</li>
+            </ul>
+
+            <div class="note">
+                <strong>Oh Shit Moment:</strong> Holiday lights suddenly form a cage of burning colors around Krampus, but he begins corrupting them from within, creating a race against time to defeat him before he breaks free.
+            </div>
+        </div>
+
+        <div class="key-info">
+            <h4>DM Prompts</h4>
+            <strong>Early Battle Observations:</strong>
+            <ul>
+                <li>"The chains seem to glint with a silvery sheen when they pass through light."</li>
+                <li>"You notice the shadows retreat slightly when near the streetlamps."</li>
+                <li>"The magical bag writhes more violently when Krampus takes damage."</li>
+                <li>"The children's cries grow weaker each time Krampus uses his aura."</li>
+            </ul>
+
+            <strong>Mid-Battle Realizations:</strong>
+            <ul>
+                <li>"The black ice seems to melt where holy symbols touch it."</li>
+                <li>"Krampus flinches noticeably when caught in bright light."</li>
+                <li>"His movements become more predictable after using legendary actions."</li>
+                <li>"The shadows seem unable to cross lines of salt or silver."</li>
+            </ul>
+
+            <strong>Desperate Measures (When Players Struggle):</strong>
+            <ul>
+                <li>"You remember the torn page mentioned silver weapons."</li>
+                <li>"The market stalls could be used to separate Krampus from his shadows."</li>
+                <li>"The children's music box might disrupt his concentration."</li>
+                <li>"Those lamp posts look unstable enough to be toppled."</li>
+            </ul>
+
+            <strong>Environmental Hints:</strong>
+            <ul>
+                <li>"The snow drifts could provide high ground advantage."</li>
+                <li>"The frozen fountain water might reflect and amplify light."</li>
+                <li>"The market stalls' awnings could be pulled down to create cover."</li>
+                <li>"The statue's base has religious symbols that make shadows uneasy."</li>
+            </ul>
+        </div>
+
+        <h3>4.4 Resolution</h3>
+
+        <div class="key-info">
+            <h4>Victory Conditions</h4>
+            <ul>
+                <li class="important">Defeat Krampus</li>
+                <li>Save at least half the children</li>
+                <li>Prevent escape to Shadowfell</li>
+                <li>Survive until dawn</li>
+            </ul>
+        </div>
+
+        <div class="read-aloud">
+            As Krampus falls, his form dissolves into shadow and frost. The twisted decorations return to normal, and warmth begins to return to the town. The children's cages spring open, and the sound of grateful tears fills the square as families are reunited.
+        </div>
+
+        <div class="key-info">
+            <h4>Rewards</h4>
+            <strong>If Krampus Captured:</strong>
+            <ul>
+                <li>Forces him to release Klaus</li>
+                <li>Can be banished</li>
+                <li>Potential future ally against greater evil</li>
+            </ul>
+
+            <strong>If Krampus Killed:</strong>
+            <ul>
+                <li>Body dissolves</li>
+                <li>Leaves magical items:
+                    <ul>
+                        <li>Chains of Binding</li>
+                        <li>Bag of Banishment</li>
+                        <li>2d6 × 100 gp in trinkets</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="key-info">
+            <h4>Aftermath</h4>
+            <ul>
+                <li>Children returned to parents</li>
+                <li>Klaus awakens if saved</li>
+                <li>Town celebrates</li>
+                <li>Potential future hooks:
+                    <ul>
+                        <li>Klaus becomes patron</li>
+                        <li>Krampus vows revenge</li>
+                        <li>Children show magical changes</li>
+                        <li>Town needs new protectors</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- After Section 4 -->
+    <div class="major-section">
+        <h2>5. Reference Materials</h2>
+
+        <h3>5.1 Dynamic Moments</h3>
+        <div class="key-info">
+            <h4>Holy Shit Triggers</h4>
+            <div class="note">Use these moments to create dramatic peaks in the story</div>
+            <ul>
+                <li>Krampus uses a child as a human shield:
+                    <ul>
+                        <li>Forces moral choice between damage and child safety</li>
+                        <li>Child recognizes a party member: "You were on the nice list!"</li>
+                        <li>Triggers memories of party members' childhood fears</li>
+                    </ul>
+                </li>
+                <li>Klaus's true identity reveal:
+                    <ul>
+                        <li>His beard erupts in radiant light during combat</li>
+                        <li>Magical toys spring to life to defend him</li>
+                        <li>Party finds their own childhood gifts in his records</li>
+                    </ul>
+                </li>
+                <li>"The Naughty List" twist:
+                    <ul>
+                        <li>Party finds their names - all marked as "Exceptionally Good"</li>
+                        <li>Their "bad" deeds were actually acts of sacrifice</li>
+                        <li>Krampus was corrupted by misunderstanding true goodness</li>
+                    </ul>
+                </li>
+                <li>Grit's Awakening:
+                    <ul>
+                        <li>Starts stress-baking cookies that grant magical buffs</li>
+                        <li>Reveals he was the first toy Klaus ever made</li>
+                        <li>Can combine with party members for combo attacks</li>
+                    </ul>
+                </li>
+                <li>Shadow-Corrupted Reindeer:
+                    <ul>
+                        <li>Crashes through stained glass window mid-combat</li>
+                        <li>Can be redeemed with children's belief</li>
+                        <li>Provides emergency escape transport if needed</li>
+                    </ul>
+                </li>
+                <li>Environmental Catastrophes:
+                    <ul>
+                        <li>Town decorations animate into a twisted parade</li>
+                        <li>Frozen fountain erupts with liquid shadow</li>
+                        <li>Holiday lights form a cage of burning colors</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Comic Relief (Use Sparingly)</h4>
+            <ul>
+                <li>Grit's Union Complaints:
+                    <ul>
+                        <li>"This violates section 7 of the Toy Makers' Agreement!"</li>
+                        <li>Hands out workplace safety pamphlets mid-combat</li>
+                        <li>Files grievance against Krampus for unsafe working conditions</li>
+                    </ul>
+                </li>
+                <li>Klaus's Sleep Talk:
+                    <ul>
+                        <li>"No, no... the unicorn goes to 42 Maple Street..."</li>
+                        <li>"The elves need overtime pay for Saturdays..."</li>
+                        <li>"Who put coal in the cookie jar again?"</li>
+                    </ul>
+                </li>
+                <li>Krampus's Mishaps:
+                    <ul>
+                        <li>Slips on his own black ice when bloodied</li>
+                        <li>Chain gets tangled in holiday lights</li>
+                        <li>Accidentally banishes own shadow minion</li>
+                    </ul>
+                </li>
+                <li>Shadow Shenanigans:
+                    <ul>
+                        <li>One has a squeaky voice and apologizes constantly</li>
+                        <li>Gets stuck in a child's jack-in-the-box</li>
+                        <li>Terrified of party member's stuffed animal</li>
+                    </ul>
+                </li>
+                <li>The Naughty List Entries:
+                    <ul>
+                        <li>"Excessive cookie sharing"</li>
+                        <li>"Told truth about vegetables tasting bad"</li>
+                        <li>"Stayed up late reading - AGAIN"</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Plot Twists</h4>
+            <ul>
+                <li>Krampus's Origin:
+                    <ul>
+                        <li>Was Klaus's original partner in judging good/evil</li>
+                        <li>Corrupted by seeing too much cruelty in the world</li>
+                        <li>Still wears matching friendship bracelet with Klaus</li>
+                    </ul>
+                </li>
+                <li>The Children's Truth:
+                    <ul>
+                        <li>Their "bad" deeds were protecting others</li>
+                        <li>Each broke rules to help someone in need</li>
+                        <li>Their "punishment" strengthened their resolve</li>
+                    </ul>
+                </li>
+                <li>Personal Connections:
+                    <ul>
+                        <li>One party member was saved by Klaus as a child</li>
+                        <li>Another has a sibling among the captured</li>
+                        <li>Someone's childhood toy was made in this workshop</li>
+                    </ul>
+                </li>
+                <li>The Binding Ritual:
+                    <ul>
+                        <li>Town decorations form a century-old ward</li>
+                        <li>Each generation added to its power</li>
+                        <li>Children's belief makes it stronger</li>
+                    </ul>
+                </li>
+                <li>Redemption Path:
+                    <ul>
+                        <li>Krampus can be reminded of original purpose</li>
+                        <li>Children's forgiveness weakens his corruption</li>
+                        <li>Klaus prepared for this possibility years ago</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <h3>5.2 Treasure Tables</h3>
+        <div class="two-col">
+            <div class="key-info">
+                <strong>Laboratory Loot</strong>
+                <table>
+                    <tr>
+                        <th>Roll</th>
+                        <th>Item</th>
+                        <th>Effect</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Potion of Frost Resistance</td>
+                        <td>Resistance to cold damage for 1 hour</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Ring of Warmth</td>
+                        <td>Constant endure elements effect</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Boots of the Winterlands</td>
+                        <td>Ignore difficult terrain from ice/snow</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Lantern of Revealing</td>
+                        <td>Shows invisible creatures within 30ft</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Cloak of Protection</td>
+                        <td>+1 to AC and saving throws</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Staff of Frost (3 charges)</td>
+                        <td>Can cast ice spells</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="key-info">
+                <strong>Krampus's Rewards</strong>
+                <table>
+                    <tr>
+                        <th>Item</th>
+                        <th>Properties</th>
+                    </tr>
+                    <tr>
+                        <td>Chains of Binding</td>
+                        <td>+1 reach weapon, bonus action grapple, advantage on grapple checks</td>
+                    </tr>
+                    <tr>
+                        <td>Bag of Banishment</td>
+                        <td>Hold Large creature (DC 15 STR save), 3 charges of Banishment spell</td>
+                    </tr>
+                    <tr>
+                        <td>Frozen Trinkets</td>
+                        <td>2d6 × 100 gp value, minor magic properties, usable as spell focus</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <h3>5.3 NPC Guide</h3>
+        <div class="two-col">
+            <div class="key-info">
+                <strong>Krampus</strong>
+                <ul>
+                    <li>Voice: Deep, gravelly, speaks in old-world dialect</li>
+                    <li>Quirks: Rattles chains when agitated</li>
+                    <li>Hook: Believes he's doing necessary work</li>
+                    <li>Tell: Temperature drops when lying</li>
+                </ul>
+            </div>
+
+            <div class="key-info">
+                <strong>Lord Klaus</strong>
+                <ul>
+                    <li>Voice: Warm, grandfatherly, slight northern accent</li>
+                    <li>Quirks: Constantly checking lists, loves riddles</li>
+                    <li>Hook: Wants to protect the children</li>
+                    <li>Tell: Eyes twinkle when pleased</li>
+                </ul>
+            </div>
+
+            <div class="key-info">
+                <strong>Ceall (Spectator)</strong>
+                <ul>
+                    <li>Voice: Precise, mathematical, slightly echoing</li>
+                    <li>Quirks: Blinks rapidly when processing</li>
+                    <li>Hook: Loyal to Klaus, loves puzzles</li>
+                    <li>Tell: Eye color shifts with mood</li>
+                </ul>
+            </div>
+
+            <div class="key-info">
+                <strong>Grit (Iron Golem)</strong>
+                <ul>
+                    <li>Voice: Metallic, formal, speaks rarely</li>
+                    <li>Quirks: Decorates self for holidays</li>
+                    <li>Hook: Protective of Klaus's room</li>
+                    <li>Tell: Steam when suspicious</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>5.4 Victory Paths</h3>
+        <div class="two-col">
+            <div class="key-info">
+                <strong>Combat Victory:</strong>
+                <ul>
+                    <li>Requirements:
+                        <ul>
+                            <li>Reduce Krampus to 0 HP</li>
+                            <li>Maintain protection of children</li>
+                            <li>Survive shadow minions</li>
+                        </ul>
+                    </li>
+                    <li>Key Tactics:
+                        <ul>
+                            <li>Use silver weapons</li>
+                            <li>Focus fire on Krampus</li>
+                            <li>Control shadow minions</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="key-info">
+                <strong>Banishment Victory:</strong>
+                <ul>
+                    <li>Requirements:
+                        <ul>
+                            <li>Complete banishment ritual</li>
+                            <li>Gather ritual components</li>
+                            <li>Protect ritual circle</li>
+                        </ul>
+                    </li>
+                    <li>Key Tactics:
+                        <ul>
+                            <li>Split party roles</li>
+                            <li>Time management</li>
+                            <li>Area control</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="key-info">
+                <strong>Negotiation Victory:</strong>
+                <ul>
+                    <li>Requirements:
+                        <ul>
+                            <li>Discover Krampus's true nature</li>
+                            <li>Gather evidence of children's innocence</li>
+                            <li>Convince Krampus to stand down</li>
+                        </ul>
+                    </li>
+                    <li>Key Tactics:
+                        <ul>
+                            <li>Collect proof</li>
+                            <li>Use diplomacy</li>
+                            <li>Appeal to history</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="key-info">
+                <strong>Sacrifice Victory:</strong>
+                <ul>
+                    <li>Requirements:
+                        <ul>
+                            <li>Player willingly takes Krampus's curse</li>
+                            <li>Klaus's approval</li>
+                            <li>Ritual preparation</li>
+                        </ul>
+                    </li>
+                    <li>Key Tactics:
+                        <ul>
+                            <li>Character motivation</li>
+                            <li>Resource management</li>
+                            <li>Timing coordination</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>5.5 Complications</h3>
+        <div class="two-col">
+            <div class="key-info">
+                <strong>Random Events (Roll d6):</strong>
+                <ul>
+                    <li>1: Child breaks free and runs</li>
+                    <li>2: Shadow surge darkens area</li>
+                    <li>3: Klaus awakens briefly</li>
+                    <li>4: Krampus reveals a secret</li>
+                    <li>5: Holiday decoration animates</li>
+                    <li>6: Weather intensifies</li>
+                </ul>
+            </div>
+
+            <div class="key-info">
+                <strong>Difficulty Adjustments:</strong>
+                <ul>
+                    <li>Easier:
+                        <ul>
+                            <li>Reduce Krampus HP by 50</li>
+                            <li>Fewer shadow minions</li>
+                            <li>Add helpful NPCs</li>
+                        </ul>
+                    </li>
+                    <li>Harder:
+                        <ul>
+                            <li>Add shadow minions</li>
+                            <li>Increase ritual urgency</li>
+                            <li>More environmental hazards</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="key-info">
+                <strong>Plot Twists:</strong>
+                <ul>
+                    <li>Klaus was Krampus's master</li>
+                    <li>Children did good deeds</li>
+                    <li>Town knew about Krampus</li>
+                    <li>Ritual has a hidden cost</li>
+                </ul>
+            </div>
+
+            <div class="key-info">
+                <strong>Time Pressure:</strong>
+                <ul>
+                    <li>Ritual progress:
+                        <ul>
+                            <li>Stage 1: Children gathered</li>
+                            <li>Stage 2: Shadows spread</li>
+                            <li>Stage 3: Klaus weakens</li>
+                            <li>Stage 4: Point of no return</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html> 
