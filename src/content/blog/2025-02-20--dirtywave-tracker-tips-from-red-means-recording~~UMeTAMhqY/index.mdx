@@ -1,0 +1,75 @@
+---
+id: UMeTAMhqY
+slug: dirtywave-tracker-tips-from-red-means-recording
+date: 2025-02-20
+title: "Dirtywave Tracker Tips from Red Means Recording"
+published: false
+---
+
+Okay, here's a quick markdown cheat sheet summarizing the main points from the video about the Dirtywave M8 Tracker. I'm red=recording, so I've focused on tips and tricks for workflow and some of the less obvious creative techniques:
+
+# M8 Tracker: Quick Tips and Tricks
+
+Based on [Red Means Recording: Tips and Tricks for the M8 Tracker](https://www.youtube.com/watch?v=QYeM4Dx2kGU)
+
+## Setting Up Basic Templates
+
+### 1. `FE` Chain: Blank "Spacer"
+
+*   **Purpose:** Creates four-bar rests or breaks. Essential for clean song arrangement and visual organization.
+
+*   **How to:**
+    *   Start a new song
+    *   Set Pattern `00` in the Song arrangement to pattern `FE` (`FE` in the song editor view)
+    *   Go to `Edit > Chain FE`.
+    *   Add `FE` in the first 4 rows of the chain's phrase selection. Each slot makes a bar.
+    *   Use these spacer chains to prevent musical information overlapping between segments
+
+### 2. `FD` Chain: Mute Instrument Phrase (Kill Command)
+*   **Purpose:** Stops any lingering notes, effects, or parameter changes.  Ensures tracks start cleanly when switching to new chains.
+
+*   **How to:**
+    *   Create a new Phrase `FD`
+    *   Go to `Edit > Chain FD`.
+    *   Add `FD` in the first row, followed by 3 rows of blank `FE` (for four bars)
+        *   Resulting chain setup: FD FE FE FE
+    *   Go to the first Phrase in that chain to apply additional properties. To make it a kill channel, choose `Option > Edit` on `PHRASE FD`
+
+### 3. Applying Mute to Track (Kill Command)
+
+*	**Purpose:** To cut off any and all signal from a track at the selected step. This can be useful to add breaks to the music.
+
+*	**How to:**
+    *  In the Phrase you wish to use the kill channel, edit the FX1, FX2 and FX3 fields on the step you want to kill the signal.
+    * Enter the `KIL` command for the 3 fields you want to apply it to. You must be in G (for global) S (for step) C(for chord) Pit(pitch) or M (for modulation) mode.
+
+### Tip: Initial Song Setup (Jeremy's workflow)
+
+*   Create both an `FE` (spacer) and `FD` (kill phrase) to start every song.  Then add a "kill" channel phrase right before the start of a new segment to mute any runaway parameters.
+
+## Tip: Chain Numbering
+
+*   To keep organized, Jeremy numbers chains starting with the instrument # they will be most associated with. Thus, bass on track 1 would start with chain 1x.
+
+## Tables: Adding Portamento
+
+*   Enter the desired notes into your chain pattern
+*	Enter the effect command:
+	*	PSL: _Number of Semitones To Move_ _Slide Time in Ticks_
+*	Each chain will have new ranges of notes that are all slid from beginning of step.
+
+## Mixing
+
+*    **"Dry" Setting:**  On instrument pages, the **`DRY`** setting can be used to clean up the sound, especially when using distortion or other heavy effects. Use the cutoff (HP or LP). Don't sleep on tables- they are a useful way to do advanced routing or to control an instrument over time.
+
+## Effects
+
+* Sidechain can be done within this instrument, and it can also be routed to affect other tracks.
+
+## Workflow Enhancement
+
+*   **Audition While Creating:** Hit play to get a better feel as to what's being placed within the song.
+* **Duplicate Patterns Quick:** `SHIFT + OPTION + Edit` on Song view dupes to new, easy to fill block, that is perfect if a quick rhythm change is needed.
+* **Quickly Jump to Next Unused Chain:** `Edit > Edit` jumps to the next available chain and can continue for easy note creation.
+
+That's a quick start. Good luck! And remember to support RED MEANS RECORDING.
