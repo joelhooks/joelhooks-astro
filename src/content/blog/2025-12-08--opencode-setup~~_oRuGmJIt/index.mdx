@@ -1,0 +1,126 @@
+---
+id: _oRuGmJIt
+slug: opencode-setup
+date: 2025-12-08
+title: "Building Coding Agent Flywheels with OpenCode"
+published: false
+---
+
+{/* 
+PROMPT: What's the hook? Why should someone care about your OpenCode setup?
+- What problem does this solve for you?
+- What's the "before" state that sucked?
+*/}
+
+## The Stack
+
+[OpenCode](https://opencode.ai) is my primary coding agent interface. Here's [my full configuration](https://github.com/joelhooks/opencode-config).
+
+{/* 
+PROMPT: What makes OpenCode different from Cursor/Copilot/Claude Code for you?
+- Why CLI over IDE integration?
+- What's the "feel" of working this way?
+*/}
+
+## Core Tools I Built
+
+### [opencode-swarm-plugin](https://github.com/joelhooks/opencode-swarm-plugin)
+
+{/* 
+PROMPT: What does this do? Why did you build it?
+- What's the workflow it enables?
+- Show a concrete example of spawning parallel agents
+*/}
+
+### [pdf-library](https://github.com/joelhooks/pdf-library)
+
+{/* 
+PROMPT: What's in your PDF library? How do you use it?
+- Technical docs? Books? Papers?
+- How does semantic search change how you reference material?
+*/}
+
+### [semantic-memory](https://github.com/joelhooks/semantic-memory)
+
+{/* 
+PROMPT: What do you store in semantic memory?
+- Decisions? Patterns? Mistakes?
+- How does persistent memory across sessions change the game?
+*/}
+
+## Essential External Tools
+
+### [beads](https://github.com/steveyegge/beads) - Git-Backed Issue Tracking
+
+{/* 
+PROMPT: Why beads over GitHub Issues or linear markdown TODOs?
+- The "discovered-from" linking pattern
+- How it survives context compaction
+- The "land the plane" ritual
+*/}
+
+### [mcp_agent_mail](https://github.com/Dicklesworthstone/mcp_agent_mail) - Multi-Agent Coordination
+
+{/* 
+PROMPT: When do you actually need multiple agents?
+- File reservation preventing conflicts
+- Async messaging between agents
+- Real example of agents coordinating
+*/}
+
+## Exploring
+
+### [beads_viewer](https://github.com/Dicklesworthstone/beads_viewer)
+
+{/* PROMPT: What does the viewer add over CLI? */}
+
+### [cass](https://github.com/Dicklesworthstone/coding_agent_session_search) - Cross-Agent Session Search
+
+{/* 
+PROMPT: The "have I solved this before?" problem
+- Searching across Claude, Cursor, Codex, etc.
+- Example of finding a past solution
+*/}
+
+### [ubs](https://github.com/Dicklesworthstone/ultimate_bug_scanner) - Ultimate Bug Scanner
+
+{/* 
+PROMPT: What does UBS catch that you miss?
+- Run before commit workflow
+- Categories of bugs it finds
+*/}
+
+## The Flywheel
+
+{/* 
+PROMPT: How do these pieces connect?
+- beads tracks work -> agents pick up tasks -> agent mail coordinates -> memory persists learnings -> cass finds past solutions
+- What's the compounding effect?
+*/}
+
+## Configuration Deep Dive
+
+{/* 
+PROMPT: Walk through key parts of your config
+- AGENTS.md structure
+- Custom commands (/swarm, /handoff, /checkpoint)
+- MCP server setup
+- The "invoke these people" pattern
+*/}
+
+## What's Not Working Yet
+
+{/* 
+PROMPT: Be honest about the rough edges
+- Context limits still hurt
+- Agent coordination overhead
+- When this setup is overkill
+*/}
+
+## Where This Is Going
+
+{/* 
+PROMPT: What's next?
+- What would make this 10x better?
+- What are you building toward?
+*/}
