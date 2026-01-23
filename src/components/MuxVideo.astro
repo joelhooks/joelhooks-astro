@@ -4,9 +4,10 @@ import MuxVideoReact from './MuxVideoReact.tsx';
 interface Props {
   playbackId: string;
   title?: string;
+  aspectRatio?: string;
 }
 
-const { playbackId, title } = Astro.props;
+const { playbackId, title, aspectRatio } = Astro.props;
 ---
 
-<MuxVideoReact client:load playbackId={playbackId} title={title} />
+<MuxVideoReact client:load playbackId={playbackId} title={title} aspectRatio={aspectRatio} />
