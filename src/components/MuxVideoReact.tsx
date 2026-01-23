@@ -4,9 +4,10 @@ interface MuxVideoProps {
   playbackId: string;
   title?: string;
   aspectRatio?: string;
+  loop?: boolean;
 }
 
-export default function MuxVideo({ playbackId, title, aspectRatio = "16/9" }: MuxVideoProps) {
+export default function MuxVideo({ playbackId, title, aspectRatio = "16/9", loop = false }: MuxVideoProps) {
   const isVertical = aspectRatio === "9/16";
   
   return (
@@ -22,6 +23,7 @@ export default function MuxVideo({ playbackId, title, aspectRatio = "16/9" }: Mu
           video_title: title || "Video",
         }}
         accentColor="#10b981"
+        loop={loop}
         style={{ 
           width: isVertical ? "min(350px, 100%)" : "100%",
           aspectRatio,

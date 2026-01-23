@@ -5,9 +5,10 @@ interface Props {
   playbackId: string;
   title?: string;
   aspectRatio?: string;
+  loop?: boolean;
 }
 
-const { playbackId, title, aspectRatio } = Astro.props;
+const { playbackId, title, aspectRatio, loop } = Astro.props;
 ---
 
-<MuxVideoReact client:load playbackId={playbackId} title={title} aspectRatio={aspectRatio} />
+<MuxVideoReact client:load playbackId={playbackId} title={title} aspectRatio={aspectRatio} loop={loop} />
