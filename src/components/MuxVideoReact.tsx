@@ -7,19 +7,26 @@ interface MuxVideoProps {
 }
 
 export default function MuxVideo({ playbackId, title, aspectRatio = "16/9" }: MuxVideoProps) {
+  const isVertical = aspectRatio === "9/16";
+  
   return (
-    <MuxPlayer
-      playbackId={playbackId}
-      metadata={{
-        video_title: title || "Video",
-      }}
-      accentColor="#10b981"
-      style={{ 
-        width: aspectRatio === "9/16" ? "auto" : "100%",
-        maxWidth: aspectRatio === "9/16" ? "350px" : "100%",
-        aspectRatio,
-        margin: "0 auto"
-      }}
-    />
+    <div style={{
+      display: "flex",
+      justifyContent: "center",
+      width: "100%",
+      margin: "2rem 0"
+    }}>
+      <MuxPlayer
+        playbackId={playbackId}
+        metadata={{
+          video_title: title || "Video",
+        }}
+        accentColor="#10b981"
+        style={{ 
+          width: isVertical ? "min(350px, 100%)" : "100%",
+          aspectRatio,
+        }}
+      />
+    </div>
   );
 }
