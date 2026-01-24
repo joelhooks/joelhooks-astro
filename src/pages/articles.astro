@@ -7,11 +7,14 @@ const olderPosts = await getCollection('legacy_blog');
 
 const allPosts = [
   ...newerPosts.map((post) => {
+    // In Astro 5, post.id is like "2019-02-24-my-blog-is-a-digital-garden-not-a-blog/index"
+    // Extract the directory name as the slug
+    const dirName = post.id.split('/')[0];
     return {
       title: post.data.title,
       date: post.data.date,
       description: post.data.description,
-      path: `/${post.data.slug || post.id.split('/').pop()?.replace(/\.(md|mdx)$/, '')}`,
+      path: `/${post.data.slug || dirName}`,
     }
   }),
   ...olderPosts.map((post) => {

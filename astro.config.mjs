@@ -13,6 +13,9 @@ import partytown from "@astrojs/partytown";
 export default defineConfig({
   site: 'https://joelhooks.com',
   prefetch: true, // Built-in prefetch in Astro 3+
+  image: {
+    service: { entrypoint: 'astro/assets/services/noop' }
+  },
   integrations: [
     tailwind(),
     mdx({
