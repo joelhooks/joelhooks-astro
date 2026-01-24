@@ -7,25 +7,23 @@ const olderPosts = await getCollection('legacy_blog');
 
 const allPosts = [
   ...newerPosts.map((post) => {
-    // In Astro 5, post.id is like "2019-02-24-my-blog-is-a-digital-garden-not-a-blog/index"
-    // Extract the directory name as the slug
-    const dirName = post.id.split('/')[0];
+    // With Content Layer API, post.id is the frontmatter slug
     return {
       title: post.data.title,
       date: post.data.date,
       description: post.data.description,
-      path: `/${post.data.slug || dirName}`,
+      path: `/${post.id}`,
     }
   }),
   ...olderPosts.map((post) => {
-    const filename = post.id.split('/').pop()?.replace(/\.(md|mdx)$/, '') || '';
-    const rawFileSplit = /(\d\d\d\d-\d\d-\d\d)(?:-)(.*)/g.exec(filename);
-    const [year, month, day] = rawFileSplit?.[1].split("-") || [];
+    // Legacy posts: extract date parts from the id (filename-based)
+    const rawFileSplit = /(\d\d\d\d)-(\d\d)-(\d\d)-(.+)/.exec(post.id);
+    const [, year, month, day, slug] = rawFileSplit || [];
     return {
       title: post.data.title,
       date: post.data.date,
       description: post.data.description,
-      path: `/blog/${year}/${month}/${day}/${rawFileSplit?.[2]}`,
+      path: `/blog/${year}/${month}/${day}/${slug}`,
     }
   }),
 ].sort(function (a, b) {
