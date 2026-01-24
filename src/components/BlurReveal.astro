@@ -1,0 +1,12 @@
+---
+import BlurRevealReact from './BlurReveal.tsx';
+
+interface Props {
+  src: string;
+  alt: string;
+}
+
+const { src, alt } = Astro.props;
+---
+
+<BlurRevealReact client:load src={src} alt={alt} />
