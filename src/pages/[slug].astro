@@ -6,12 +6,11 @@ export const getStaticPaths = async () => {
   const posts = await getCollection('blog');
 
   return posts.map((post) => {
-    // In Astro 5, post.id is like "2019-02-24-my-blog-is-a-digital-garden-not-a-blog/index"
-    // Extract the directory name as the slug
-    const dirName = post.id.split('/')[0];
+    // In Astro 5 with Content Layer API, post.id is now the frontmatter slug
+    // (glob loader uses slug from frontmatter as the entry id)
     return {
       params: {
-        slug: post.data.slug || dirName,
+        slug: post.id,
       },
       props: { post },
     };
