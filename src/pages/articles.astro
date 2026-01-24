@@ -1,25 +1,27 @@
 ---
 import {SEO} from "astro-seo"
-const newerPosts = await Astro.glob("../content/blog/**/*.md*")
-const olderPosts = await Astro.glob("/src/content/legacy_blog/**/*.md*")
+import { getCollection } from 'astro:content';
+
+const newerPosts = await getCollection('blog');
+const olderPosts = await getCollection('legacy_blog');
 
 const allPosts = [
   ...newerPosts.map((post) => {
     return {
-      title: post.frontmatter.title,
-      date: post.frontmatter.date,
-      description: post.frontmatter.description,
-      path: `/${post.frontmatter.slug}`,
+      title: post.data.title,
+      date: post.data.date,
+      description: post.data.description,
+      path: `/${post.data.slug || post.id.split('/').pop()?.replace(/\.(md|mdx)$/, '')}`,
     }
   }),
   ...olderPosts.map((post) => {
-    const split = post.file.split("/").pop().split(".").shift()
-    const rawFileSplit = /(\d\d\d\d-\d\d-\d\d)(?:-)(.*)/g.exec(split)
-    const [year, month, day] = rawFileSplit?.[1].split("-") || []
+    const filename = post.id.split('/').pop()?.replace(/\.(md|mdx)$/, '') || '';
+    const rawFileSplit = /(\d\d\d\d-\d\d-\d\d)(?:-)(.*)/g.exec(filename);
+    const [year, month, day] = rawFileSplit?.[1].split("-") || [];
     return {
-      title: post.frontmatter.title,
-      date: post.frontmatter.date,
-      description: post.frontmatter.description,
+      title: post.data.title,
+      date: post.data.date,
+      description: post.data.description,
       path: `/blog/${year}/${month}/${day}/${rawFileSplit?.[2]}`,
     }
   }),

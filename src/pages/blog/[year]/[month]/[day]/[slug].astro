@@ -1,14 +1,15 @@
 ---
 import {SEO} from "astro-seo"
-export const getStaticPaths = async () => {
-  //load astro glob with utf-8 encoding
+import { getCollection, render } from 'astro:content';
 
-  const posts = await Astro.glob("/src/content/legacy_blog/**/*.md*")
+export const getStaticPaths = async () => {
+  const posts = await getCollection('legacy_blog');
 
   return posts.map((post) => {
-    const split = post.file.split("/").pop().split(".").shift()
-    const rawFileSplit = /(\d\d\d\d-\d\d-\d\d)(?:-)(.*)/g.exec(split)
-    const [year, month, day] = rawFileSplit?.[1].split("-") || []
+    // Extract date and slug from filename like "2012-07-25-my-post-title"
+    const filename = post.id.split('/').pop()?.replace(/\.(md|mdx)$/, '') || '';
+    const rawFileSplit = /(\d\d\d\d-\d\d-\d\d)(?:-)(.*)/g.exec(filename);
+    const [year, month, day] = rawFileSplit?.[1].split("-") || [];
 
     return {
       params: {
@@ -17,24 +18,16 @@ export const getStaticPaths = async () => {
         month,
         day,
       },
-    }
-  })
+      props: { post, filename },
+    };
+  });
 }
 
-const {slug, year, month, day} = Astro.params
-const posts = await Astro.glob("/src/content/legacy_blog/**/*.md*")
-const post = posts.find((post) => {
-  const split = post.file.split("/").pop().split(".").shift()
+const { post, filename } = Astro.props;
+const { Content } = await render(post);
+const frontmatter = post.data;
 
-  return split === `${year}-${month}-${day}-${slug}`
-}) || {
-  Content: () => null,
-}
-const {Content, frontmatter} = post
-
-const contentPath = `https://github.com/joelhooks/joelhooks-astro/edit/main/src/content/legacy_blog${
-  post.file.split("src/content/legacy_blog")[1]
-}`
+const contentPath = `https://github.com/joelhooks/joelhooks-astro/edit/main/src/content/legacy_blog/${post.id}`
 ---
 
 <!DOCTYPE html>
