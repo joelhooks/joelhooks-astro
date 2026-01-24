@@ -28,4 +28,20 @@ const {title} = Astro.props
   <body class="prose sm:px-20 px-2 pb-20 mt-16">
     <slot />
   </body>
+  <style is:global>
+    /* Image captions - hug up to images */
+    .prose img + em,
+    .prose p:has(img) + p > em:only-child {
+      display: block;
+      text-align: center;
+      margin-top: -1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      color: #666;
+    }
+    
+    .prose p:has(img) {
+      margin-bottom: 0.25rem;
+    }
+  </style>
 </html>
