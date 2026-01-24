@@ -1,35 +1,26 @@
 ---
 import {SEO} from "astro-seo"
+import { getCollection, render } from 'astro:content';
 
-  type BlogPost = {
-    frontmatter: {
-      slug: string
-      title: string
-      description?: string
-      banner?: string
-    }
-    file: string
-    Content: () => any
-  }
 export const getStaticPaths = async () => {
+  const posts = await getCollection('blog');
 
-
-  const posts = await Astro.glob<BlogPost>("../content/blog/**/*.md*")
-
-  return posts.map((post) => ({
-    params: {
-      slug: post.frontmatter.slug,
-    },
-  }))
+  return posts.map((post) => {
+    // In Astro 5, post.id is like "2019-02-24-my-blog-is-a-digital-garden-not-a-blog/index"
+    // Extract the directory name as the slug
+    const dirName = post.id.split('/')[0];
+    return {
+      params: {
+        slug: post.data.slug || dirName,
+      },
+      props: { post },
+    };
+  });
 }
 
-const posts = await Astro.glob<BlogPost>("../content/blog/**/*.md*")
-const {slug} = Astro.params
-const post = posts.find((post) => post.frontmatter.slug === slug) || {
-  Content: () => null,
-}
-
-const {Content, frontmatter} = post
+const { post } = Astro.props;
+const { Content } = await render(post);
+const frontmatter = post.data;
 
 const sanitizeTitle = (title: string) => {
   return title
@@ -41,9 +32,7 @@ const ogImage = `https://res.cloudinary.com/badass-courses/image/upload/w_1200,h
   sanitizeTitle(frontmatter.title)
 )}/v1731357274/social-image-templates/joelhooks-com_sbhjby.png`
 
-const contentPath = `https://github.com/joelhooks/joelhooks-astro/edit/main/src/content/blog${
-  post.file.split("src/content/blog")[1]
-}`
+const contentPath = `https://github.com/joelhooks/joelhooks-astro/edit/main/src/content/blog/${post.id}`
 ---
 
 <!DOCTYPE html>
