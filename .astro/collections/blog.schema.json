@@ -39,6 +39,9 @@
         "banner": {
           "type": "string"
         },
+        "published": {
+          "type": "boolean"
+        },
         "$schema": {
           "type": "string"
         }
