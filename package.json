@@ -1,10 +1,10 @@
 {
-  "name": "@example/basics",
+  "name": "joelhooks-astro",
   "type": "module",
   "version": "0.0.1",
   "private": true,
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "scripts": {
     "dev": "astro dev",
@@ -15,17 +15,18 @@
     "newPost": "node ./scripts/new-post.cjs"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.0",
-    "@astrojs/partytown": "^2.1.0",
-    "@astrojs/react": "^4.0.0",
-    "@astrojs/sitemap": "^3.2.0",
-    "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/markdown-remark": "^7.2.4",
+    "@astrojs/mdx": "^7.0.8",
+    "@astrojs/partytown": "^2.1.7",
+    "@astrojs/react": "^6.0.4",
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/tailwind": "^6.0.2",
     "@fec/remark-a11y-emoji": "^3.1.0",
     "@mux/mux-player-react": "^3.10.2",
     "@tailwindcss/typography": "^0.5.8",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
-    "astro": "^5.0.0",
+    "astro": "^7.2.9",
     "astro-seo": "^0.8.0",
     "astro-seo-schema": "^5.0.0",
     "moment": "^2.29.4",
@@ -42,7 +43,7 @@
     "shortid": "^2.2.16",
     "slug": "^8.2.2",
     "tailwindcss": "^3.0.24",
-    "typescript": "^4.9.3"
+    "typescript": "^5.7.0"
   },
   "packageManager": "pnpm@10.14.0"
 }
