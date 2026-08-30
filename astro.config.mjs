@@ -8,6 +8,7 @@ import remarkGfm from 'remark-gfm';
 // import remarkEmbedImages from 'remark-embed-images'; // Disabled for Astro 4 compat
 import sitemap from "@astrojs/sitemap";
 import partytown from "@astrojs/partytown";
+import { unified } from '@astrojs/markdown-remark';
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,12 +17,14 @@ export default defineConfig({
   image: {
     service: { entrypoint: 'astro/assets/services/noop' }
   },
+  markdown: {
+    processor: unified({
+      remarkPlugins: [remarkEmoji, remarkInlineLinks, remarkGfm]
+    })
+  },
   integrations: [
     tailwind(),
-    mdx({
-      remarkPlugins: [remarkEmoji, remarkInlineLinks, remarkGfm]
-      // Note: removed deprecated extendPlugins option
-    }),
+    mdx(),
     react(),
     sitemap(),
     partytown()
